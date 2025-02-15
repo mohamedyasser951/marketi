@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/features/login/presentation/widgets/login_form.dart';
 
@@ -11,12 +11,12 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 10,
+          spacing: 20.h,
           children: [
-            SvgPicture.asset(Assets.imagesLogoSplashScreen),
+            Image.asset(Assets.imagesLogoSplashScreen),
             LoginForm(),
           ],
         ),

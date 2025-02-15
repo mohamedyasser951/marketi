@@ -35,7 +35,7 @@ class AppTextFileld extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         enabledBorder: buildBorderTextField(AppColors.lightBoderColor),
-        focusedBorder: buildBorderTextField(AppColors.lightBoderColor),
+        focusedBorder: buildBorderTextField(AppColors.primaryColor),
         errorBorder: buildBorderTextField(Colors.red),
         focusedErrorBorder: buildBorderTextField(Colors.red),
       ),
