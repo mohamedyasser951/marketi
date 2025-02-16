@@ -14,6 +14,10 @@ class Assets {
   /// assets/images/forgot_password_with_hhone.svg
   static const String imagesForgotPasswordWithHhone = "assets/images/forgot_password_with_hhone.svg";
 
+  /// Assets for imagesLogInLogo
+  /// assets/images/log_in_logo.png
+  static const String imagesLogInLogo = "assets/images/log_in_logo.png";
+
   /// Assets for imagesLogInValidation
   /// assets/images/log_in_validation.svg
   static const String imagesLogInValidation = "assets/images/log_in_validation.svg";

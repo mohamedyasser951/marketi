@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/colors.dart';
-
-import 'features/login/presentation/pages/login_page.dart';
+import 'package:marketi/core/routing/app_routing.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -19,7 +19,8 @@ class App extends StatelessWidget {
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
         ),
-        home: const LoginPage(),
+        onGenerateRoute: AppRouting.onGenerteRoute,
+        initialRoute: AppRoutePaths.onBoarding,
       ),
     );
   }

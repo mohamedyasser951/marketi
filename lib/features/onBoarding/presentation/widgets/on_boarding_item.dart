@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketi/core/constants/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketi/features/onBoarding/data/models/on_boarding_model.dart';
 
 class OnBoardingItem extends StatelessWidget {
@@ -9,15 +9,9 @@ class OnBoardingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Image(
-          image: AssetImage(
-            model.image,
-          ),
-          width: 300,
-          height: 230,
-        ),
+        SvgPicture.asset(model.image),
         const SizedBox(
           height: 40.0,
         ),
@@ -26,15 +20,6 @@ class OnBoardingItem extends StatelessWidget {
                 .textTheme
                 .bodyLarge!
                 .copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
-        Container(
-          margin: EdgeInsets.only(top: 10),
-          height: 2,
-          width: 100,
-          color: AppColors.primaryColor,
-        ),
-        const SizedBox(
-          height: 20.0,
-        ),
         SizedBox(
           child: Text(
             model.subTitle,

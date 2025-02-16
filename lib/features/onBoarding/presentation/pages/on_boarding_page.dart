@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/features/onBoarding/data/models/on_boarding_model.dart';
@@ -33,6 +35,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   bool isLast = false;
 
   void submitStateOfOnBoarding() async {
+    Navigator.pushReplacementNamed(context, AppRoutePaths.login);
     // SharedHelper.saveData(key: "onBoarding", value: true).then((value) {
     //   if (value) {
     //     naviagetAndKill(context: context, widget: SocialLogin());
@@ -42,9 +45,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -56,7 +59,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     },
                     child: Text(
                       "Skip",
-                      style: TextStyle(color: AppColors.primaryColor),
+                      style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp),
                     )),
               ),
               SizedBox(
@@ -75,28 +81,29 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   },
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: 3,
+                  itemCount: boardingData.length,
                   controller: pageController,
                   itemBuilder: ((context, index) =>
                       OnBoardingItem(model: boardingData[index])),
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 40.0.sp,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(horizontal: 20.0.h),
                     child: SmoothPageIndicator(
                       controller: pageController,
                       count: boardingData.length,
                       effect: ExpandingDotsEffect(
                         activeDotColor: AppColors.primaryColor,
-                        dotWidth: 8.0,
-                        dotHeight: 8.0,
-                        spacing: 4.0,
+                        dotColor: AppColors.lightBlue700Color,
+                        dotWidth: 8.0.w,
+                        dotHeight: 8.0.h,
+                        spacing: 4.0.h,
                       ),
                     ),
                   ),
@@ -112,7 +119,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       },
                       child: Text(
                         "next",
-                        style: TextStyle(color: AppColors.primaryColor),
+                        style: TextStyle(
+                            color: AppColors.primaryColor,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold),
                       ))
                 ],
               ),

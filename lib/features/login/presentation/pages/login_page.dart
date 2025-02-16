@@ -9,16 +9,25 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          spacing: 20.h,
-          children: [
-            Image.asset(Assets.imagesLogoSplashScreen),
-            LoginForm(),
-          ],
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 10.h,
+            children: [
+              Image.asset(Assets.imagesLogInLogo),
+              LoginForm(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Are you new in Marketi"),
+                  TextButton(onPressed: () {}, child: Text("Sign Up"))
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     ));

@@ -15,11 +15,14 @@ class _LoginFormState extends State<LoginForm> {
   late TextEditingController _passwordController;
   late GlobalKey<FormState> _formKey;
 
+  late ValueNotifier<bool> valueNotifier;
+
   @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _formKey = GlobalKey<FormState>();
+    valueNotifier = ValueNotifier<bool>(false);
     super.initState();
   }
 
@@ -28,7 +31,7 @@ class _LoginFormState extends State<LoginForm> {
     return Form(
         key: _formKey,
         child: Column(
-            spacing: 20.h,
+            // spacing: 10.h,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppTextFileld(
@@ -40,16 +43,46 @@ class _LoginFormState extends State<LoginForm> {
                 prefixIcon: Icons.email_outlined,
                 hint: "Email",
               ),
-              AppTextFileld(
-                  controller: _passwordController,
-                  hint: "Password",
-                  obscureText: true,
-                  textInputType: TextInputType.visiblePassword,
-                  suffixWidget:
-                      IconButton(onPressed: null, icon: Icon(Icons.visibility)),
-                  validator: (value) {
-                    return null;
+              SizedBox(height: 20.h),
+              ValueListenableBuilder<bool>(
+                  valueListenable: valueNotifier,
+                  builder: (context, value, child) {
+                    return AppTextFileld(
+                        controller: _passwordController,
+                        prefixIcon: Icons.lock_clock_outlined,
+                        hint: "Password",
+                        obscureText: value,
+                        textInputType: TextInputType.visiblePassword,
+                        suffixWidget: IconButton(
+                            onPressed: () {
+                              valueNotifier.value = !valueNotifier.value;
+                            },
+                            icon: Icon(
+                              valueNotifier.value
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                            )),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Password is required";
+                          }
+                          return null;
+                        });
                   }),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(children: [
+                    Checkbox(
+                      value: false,
+                      onChanged: (value) {},
+                    ),
+                    Text("Remember me"),
+                  ]),
+                  TextButton(onPressed: () {}, child: Text("Forget Password?"))
+                ],
+              ),
+              SizedBox(height: 20.h),
               AppButton(btnText: "Login", onPress: () {})
             ]));
   }
