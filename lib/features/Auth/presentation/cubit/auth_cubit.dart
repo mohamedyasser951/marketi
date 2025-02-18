@@ -2,9 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/features/Auth/data/models/login_request_body.dart';
 import 'package:marketi/features/Auth/data/models/signup_request_body.dart';
-
 import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
-
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -20,8 +18,10 @@ class AuthCubit extends Cubit<AuthState> {
       success: (data) {
         emit(state.copyWith(status: AuthStatus.loggedIn, token: data.access));
       },
-      error: (message) {
-        emit(state.copyWith(status: AuthStatus.error, message: message));
+      error: (errorModel) {
+        emit(state.copyWith(
+            status: AuthStatus.error,
+            message: errorModel.getAllErrorMessages()));
       },
     );
   }
@@ -34,8 +34,10 @@ class AuthCubit extends Cubit<AuthState> {
         emit(state.copyWith(
             status: AuthStatus.loggedIn, token: data.accessToken));
       },
-      error: (message) {
-        emit(state.copyWith(status: AuthStatus.error, message: message));
+      error: (errorModel) {
+        emit(state.copyWith(
+            status: AuthStatus.error,
+            message: errorModel.getAllErrorMessages()));
       },
     );
   }
@@ -46,8 +48,10 @@ class AuthCubit extends Cubit<AuthState> {
       success: (data) {
         emit(state.copyWith(status: AuthStatus.loggedOut));
       },
-      error: (message) {
-        emit(state.copyWith(status: AuthStatus.error, message: message));
+      error: (errorModel) {
+        emit(state.copyWith(
+            status: AuthStatus.error,
+            message: errorModel.getAllErrorMessages()));
       },
     );
   }

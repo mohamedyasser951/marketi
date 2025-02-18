@@ -10,7 +10,7 @@ part of 'auth_api_service.dart';
 
 class _AuthApiService implements AuthApiService {
   _AuthApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://127.0.0.1:8000/api/';
+    baseUrl ??= 'http://192.168.1.9:8000/api/';
   }
 
   final Dio _dio;

@@ -18,7 +18,7 @@ class AuthRepoImplem extends AuthRepo {
     try {
       return ApiResult.success(await authApiService.login(loginRequestBody));
     } catch (e) {
-      return ApiResult.error(ErrorHandler.handle(e).message!);
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 
@@ -28,7 +28,7 @@ class AuthRepoImplem extends AuthRepo {
     try {
       return ApiResult.success(await authApiService.signup(signupRequestBody));
     } catch (e) {
-      return ApiResult.error(ErrorHandler.handle(e).message!);
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 
@@ -37,7 +37,7 @@ class AuthRepoImplem extends AuthRepo {
     try {
       return ApiResult.success(await authApiService.logout(token));
     } catch (e) {
-      return ApiResult.error(ErrorHandler.handle(e).message!);
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 }

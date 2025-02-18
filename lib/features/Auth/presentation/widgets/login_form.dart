@@ -25,7 +25,7 @@ class _LoginFormState extends State<LoginForm> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _formKey = GlobalKey<FormState>();
-    valueNotifier = ValueNotifier<bool>(false);
+    valueNotifier = ValueNotifier<bool>(true);
     super.initState();
   }
 
@@ -98,7 +98,7 @@ class _LoginFormState extends State<LoginForm> {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return state.status.isLoading
-                      ? const CircularProgressIndicator()
+                      ? Center(child: const CircularProgressIndicator())
                       : AppButton(
                           btnText: "Login",
                           onPress: () {

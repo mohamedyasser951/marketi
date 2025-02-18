@@ -9,15 +9,14 @@ import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 GetIt getIt = GetIt.instance;
 
 void setupServiceLocator() {
+  Dio dio = DioFactory.getDio();
   //Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepo: getIt()));
 
   //Repositories
-  getIt.registerSingleton<AuthRepo>(AuthRepoImplem(authApiService: getIt()));
+  getIt.registerSingleton<AuthRepo>(AuthRepoImplem(authApiService: AuthApiService(dio)));
 
   //Services
-  getIt.registerSingleton<AuthApiService>(AuthApiService(getIt()));
+  getIt.registerSingleton<AuthApiService>(AuthApiService(dio));
 
-  //External
-  getIt.registerSingleton<Dio>(DioFactory.getDio());
 }

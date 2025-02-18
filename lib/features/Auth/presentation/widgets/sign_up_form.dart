@@ -31,8 +31,8 @@ class _SignUpFormState extends State<SignUpForm> {
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
     _formKey = GlobalKey<FormState>();
-    valueNotifierPassword = ValueNotifier<bool>(false);
-    valueNotifierConfirmPassword = ValueNotifier<bool>(false);
+    valueNotifierPassword = ValueNotifier<bool>(true);
+    valueNotifierConfirmPassword = ValueNotifier<bool>(true);
     super.initState();
   }
 
@@ -136,7 +136,7 @@ class _SignUpFormState extends State<SignUpForm> {
               BlocBuilder<AuthCubit, AuthState>(
                 builder: (context, state) {
                   return state.status.isLoading
-                      ? const CircularProgressIndicator()
+                      ? Center(child: const CircularProgressIndicator())
                       : AppButton(
                           btnText: "Sign Up",
                           onPress: () {
