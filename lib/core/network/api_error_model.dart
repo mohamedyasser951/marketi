@@ -3,10 +3,12 @@ part 'api_error_model.g.dart';
 
 @JsonSerializable()
 class ApiErrorModel {
+  final String? message;
   final int? code;
   Map<String, dynamic>? errors;
 
   ApiErrorModel({
+    this.message,
     this.code,
     this.errors,
   });
@@ -17,7 +19,7 @@ class ApiErrorModel {
 
   String getAllErrorMessages() {
     if (errors == null && errors?.values == null) {
-      return "Something went wrong While processing your request";
+      return message ?? "Something went wrong";
     }
     final errorMessage = errors!.entries.map((entry) {
       final value = entry.value;
