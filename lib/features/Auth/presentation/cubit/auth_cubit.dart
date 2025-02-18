@@ -7,10 +7,10 @@ import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 
 part 'auth_state.dart';
 
-class AuthCubit extends Cubit<LoginState> {
+class AuthCubit extends Cubit<AuthState> {
   AuthRepo authRepo;
   AuthCubit({required this.authRepo})
-      : super(const LoginState(status: AuthStatus.initial));
+      : super(const AuthState(status: AuthStatus.initial));
 
   void login({required String email, required String password}) async {
     emit(state.copyWith(status: AuthStatus.loading));

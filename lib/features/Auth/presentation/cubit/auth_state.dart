@@ -2,23 +2,31 @@ part of 'auth_cubit.dart';
 
 enum AuthStatus { initial, loading, loggedIn, loggedOut, error }
 
-class LoginState extends Equatable {
+extension AuthStatusX on AuthStatus {
+  bool get isInitial => this == AuthStatus.initial;
+  bool get isLoading => this == AuthStatus.loading;
+  bool get isLoggedIn => this == AuthStatus.loggedIn;
+  bool get isLoggedOut => this == AuthStatus.loggedOut;
+  bool get isError => this == AuthStatus.error;
+}
+
+class AuthState extends Equatable {
   final AuthStatus status;
   final String? token;
   final String message;
 
-  const LoginState({
+  const AuthState({
     this.status = AuthStatus.initial,
     this.token,
     this.message = '',
   });
 
-  LoginState copyWith({
+  AuthState copyWith({
     AuthStatus? status,
     String? token,
     String? message,
   }) {
-    return LoginState(
+    return AuthState(
       status: status ?? this.status,
       token: token ?? this.token,
       message: message ?? this.message,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/widgets/app_button.dart';
 import 'package:marketi/core/widgets/app_text_form_field.dart';
+import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
+import 'package:marketi/features/Auth/presentation/widgets/auth_bloc_listener.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -27,6 +30,14 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    valueNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Form(
         key: _formKey,
@@ -34,6 +45,7 @@ class _LoginFormState extends State<LoginForm> {
             // spacing: 10.h,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              AuthBlocListener(),
               AppTextFileld(
                 controller: _emailController,
                 validator: (value) {
@@ -83,7 +95,21 @@ class _LoginFormState extends State<LoginForm> {
                 ],
               ),
               SizedBox(height: 20.h),
-              AppButton(btnText: "Login", onPress: () {})
+              BlocBuilder<AuthCubit, AuthState>(
+                builder: (context, state) {
+                  return state.status.isLoading
+                      ? const CircularProgressIndicator()
+                      : AppButton(
+                          btnText: "Login",
+                          onPress: () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<AuthCubit>().login(
+                                  email: _emailController.text,
+                                  password: _passwordController.text);
+                            }
+                          });
+                },
+              )
             ]));
   }
 }
