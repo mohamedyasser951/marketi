@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
-import 'package:marketi/features/SignUp/presentation/widgets/sign_up_form.dart';
+import 'package:marketi/features/Auth/presentation/widgets/sign_up_form.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});

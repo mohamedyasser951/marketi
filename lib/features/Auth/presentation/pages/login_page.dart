@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
-import 'package:marketi/features/login/presentation/widgets/login_form.dart';
+import 'package:marketi/features/Auth/presentation/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
