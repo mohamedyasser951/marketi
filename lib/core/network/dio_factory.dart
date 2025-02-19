@@ -6,7 +6,7 @@ class DioFactory {
 
   DioFactory._();
   static Dio getDio() {
-    Duration timeout = const Duration(seconds: 80);
+    Duration timeout = const Duration(seconds: 1500);
     if (dio == null) {
       dio = Dio();
       dio!.options
