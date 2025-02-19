@@ -14,6 +14,10 @@ class Assets {
   /// assets/images/forgot_password_with_hhone.svg
   static const String imagesForgotPasswordWithHhone = "assets/images/forgot_password_with_hhone.svg";
 
+  /// Assets for imagesIPhone11Pro3x
+  /// assets/images/iPhone_11_Pro@3x.png
+  static const String imagesIPhone11Pro3x = "assets/images/iPhone_11_Pro@3x.png";
+
   /// Assets for imagesLogInLogo
   /// assets/images/log_in_logo.png
   static const String imagesLogInLogo = "assets/images/log_in_logo.png";

@@ -6,9 +6,11 @@ abstract class ApiConstants {
   static const String tokenVerify = '/auth/token/verify/';
   static const String logout = '/auth/logout/';
   static const String userProfile = '/auth/profile/';
-  static const String products = '/products/';
+
+  // product
+  static const String products = 'products/';
   static const String categories = '/categories/';
-  static const String banners = '/banners/';
+  static const String banners = 'banners/';
   static const String favorites = '/favorites/';
   static const String cart = '/cart/';
 
