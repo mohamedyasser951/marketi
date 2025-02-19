@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
-import 'package:marketi/features/home/presentation/widgets/product_item.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/product_item.dart';
 
 class ProductsBuilder extends StatelessWidget {
   final List<ProductModel> products;

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:marketi/core/network/api_constant.dart';
 import 'package:marketi/features/home/data/models/banner_model.dart';
+import 'package:marketi/features/home/data/models/category_model.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
 import 'package:retrofit/retrofit.dart';
 part 'home_api_service.g.dart';
@@ -11,6 +12,9 @@ abstract class HomeApiService {
 
   @GET(ApiConstants.banners)
   Future<List<BannerModel>> getBanners();
+
+  @GET(ApiConstants.categories)
+  Future<List<CategoryModel>> getCategories();
 
   @GET(ApiConstants.products)
   Future<List<ProductModel>> getProducts();

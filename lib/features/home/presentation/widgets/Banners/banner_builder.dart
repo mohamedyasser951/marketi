@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/features/home/data/models/banner_model.dart';
-import 'package:marketi/features/home/presentation/widgets/banner_item.dart';
+import 'package:marketi/features/home/presentation/widgets/Banners/banner_item.dart';
 
 class BannerBuilder extends StatelessWidget {
   final List<BannerModel> banners;

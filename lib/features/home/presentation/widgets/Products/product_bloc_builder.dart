@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
-import 'package:marketi/features/home/presentation/widgets/banner_builder.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/products_builder.dart';
 
-class BannersBlocBuilder extends StatelessWidget {
-  const BannersBlocBuilder({super.key});
+class ProductsBlocBuilder extends StatelessWidget {
+  const ProductsBlocBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       buildWhen: (previous, current) =>
-          current.status.isGetBannerLoading ||
-          current.status.isGetBannerError ||
-          current.status.isGetBannerSuccess,
+          current.status.isGetProductsLoading ||
+          current.status.isGetProductsSuccess ||
+          current.status.isGetProductsError,
       builder: (context, state) {
-        if (state.status.isGetBannerLoading) {
+        if (state.status.isGetProductsLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        } else if (state.status.isGetBannerError) {
+        } else if (state.status.isGetProductsError) {
           return Center(
             child: Text(state.errorMessage),
           );
-        } else if (state.status.isGetBannerSuccess) {
-          return BannerBuilder(banners: state.banners);
+        } else if (state.status.isGetProductsSuccess) {
+          return ProductsBuilder(
+            products: state.products,
+          );
         } else {
           return SizedBox.shrink();
         }

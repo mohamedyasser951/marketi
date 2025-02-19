@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
-import 'package:marketi/features/home/presentation/widgets/banners_bloc_builder.dart';
-import 'package:marketi/features/home/presentation/widgets/product_bloc_builder.dart';
+import 'package:marketi/features/home/presentation/widgets/Banners/banners_bloc_builder.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/product_bloc_builder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

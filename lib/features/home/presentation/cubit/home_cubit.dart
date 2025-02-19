@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/features/home/data/models/banner_model.dart';
+import 'package:marketi/features/home/data/models/category_model.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
 import 'package:marketi/features/home/data/repositories/home_repo.dart';
 part 'home_state.dart';
@@ -16,10 +17,10 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(status: HomeStatus.getBannerloading));
     final result = await homeRepo.getBanners();
     result.when(
-      success: (data) {
+      success: (banners) {
         emit(state.copyWith(
           status: HomeStatus.getBannerSuccess,
-          banners: data,
+          banners: banners,
         ));
       },
       error: (errorModel) {
@@ -30,15 +31,32 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
+  Future<void> getCategories() async {
+    emit(state.copyWith(status: HomeStatus.getCategoriesLoading));
+    final result = await homeRepo.getCategories();
+    result.when(
+      success: (categories) {
+        emit(state.copyWith(
+          status: HomeStatus.getCategoriesSuccess,
+          categories: categories,
+        ));
+      },
+      error: (errorModel) {
+        emit(state.copyWith(
+            status: HomeStatus.getCategoriesError,
+            errorMessage: errorModel.getAllErrorMessages()));
+      },
+    );
+  }
+
   Future<void> getProducts() async {
     emit(state.copyWith(status: HomeStatus.getProductsLoading));
     final result = await homeRepo.getProducts();
     result.when(
-      success: (data) {
-        log(data.length.toString());
+      success: (products) {
         emit(state.copyWith(
           status: HomeStatus.getProductsSuccess,
-          products: data,
+          products: products,
         ));
       },
       error: (errorModel) {
