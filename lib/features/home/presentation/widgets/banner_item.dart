@@ -12,11 +12,14 @@ class BannerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-        height: 120.h,
-        width: double.maxFinite,
-        fit: BoxFit.contain,
-        errorWidget: (context, url, error) => Icon(Icons.error),
-        imageUrl: banner.image);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: CachedNetworkImage(
+          height: 130.h,
+          width: 250.w,
+          fit: BoxFit.cover,
+          errorWidget: (context, url, error) => Icon(Icons.error),
+          imageUrl: banner.image),
+    );
   }
 }

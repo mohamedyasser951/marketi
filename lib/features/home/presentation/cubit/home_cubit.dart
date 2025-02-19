@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/features/home/data/models/banner_model.dart';
@@ -33,12 +35,14 @@ class HomeCubit extends Cubit<HomeState> {
     final result = await homeRepo.getProducts();
     result.when(
       success: (data) {
+        log(data.length.toString());
         emit(state.copyWith(
           status: HomeStatus.getProductsSuccess,
           products: data,
         ));
       },
       error: (errorModel) {
+        log(errorModel.getAllErrorMessages());
         emit(state.copyWith(
             status: HomeStatus.getProductsError,
             errorMessage: errorModel.getAllErrorMessages()));

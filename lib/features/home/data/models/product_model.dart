@@ -12,8 +12,8 @@ class ProductModel {
   @JsonKey(name: 'average_rating')
   final double averageRating;
   @JsonKey(name: 'primary_image_url')
-  final String productImage;
-  final List<String> gallery;
+  final String? productImage;
+  final List<String?>? gallery;
 
   ProductModel({
     required this.id,

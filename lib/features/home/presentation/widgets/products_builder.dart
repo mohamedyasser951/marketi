@@ -11,14 +11,16 @@ class ProductsBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverGrid.builder(
-        itemCount: products.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.6,
-        ),
-        itemBuilder: (context, index) {
-          return ProductItem(produc: products[index]);
-        });
+    return Expanded(
+      child: GridView.builder(
+          itemCount: products.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.6,
+          ),
+          itemBuilder: (context, index) {
+            return ProductItem(product: products[index]);
+          }),
+    );
   }
 }

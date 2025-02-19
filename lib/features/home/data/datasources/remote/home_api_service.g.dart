@@ -29,7 +29,7 @@ class _HomeApiService implements HomeApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/banners/',
+            'banners/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -60,7 +60,7 @@ class _HomeApiService implements HomeApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/products/',
+            'products/',
             queryParameters: queryParameters,
             data: _data,
           )

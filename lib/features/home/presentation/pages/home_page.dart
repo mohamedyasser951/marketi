@@ -12,23 +12,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()
-        ..getBanners()
-        ..getProducts(),
+        ..getProducts()..getBanners(),
       child: Scaffold(
-        body: CustomScrollView(slivers: [
-          SliverAppBar(
-            expandedHeight: 90,
-            floating: true,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Marketi'),
-              centerTitle: true,
-            ),
-          ),
-          SliverToBoxAdapter(child: BannersBlocBuilder()),
-          // BannersBlocBuilder(),
-          // ProductsBlocBuilder(),
-        ]),
+        body: SafeArea(
+            child: Column(
+              children: const [
+                BannersBlocBuilder(),
+                ProductsBlocBuilder(),
+              ],
+            )),
       ),
     );
   }

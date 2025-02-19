@@ -1,11 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductModel produc;
-  const ProductItem({super.key, required this.produc});
+  final ProductModel product;
+  const ProductItem({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +21,24 @@ class ProductItem extends StatelessWidget {
               Center(
                 child: Card(
                     color: AppColors.lightBlue700Color,
-                    child: Image.asset(Assets.imagesIPhone11Pro3x,
-                        fit: BoxFit.cover, height: 170, width: 200)),
+                    child: CachedNetworkImage(
+                      height: 170,
+                      width: 200,
+                      fit: BoxFit.contain,
+                      imageUrl: product.productImage!,
+                    )),
               ),
               Row(
                 children: [
-                  Text("Product Price", style: textTheme.bodyLarge),
+                  Text("\$${product.price}", style: textTheme.bodyLarge),
                   Spacer(),
                   Text(
-                    "rating",
+                    "${product.averageRating}",
                     style: textTheme.bodyLarge,
                   ),
                 ],
               ),
-              Text(" Product Name", style: textTheme.bodyLarge),
+              Text(product.name, style: textTheme.bodyLarge),
             ],
           ),
         ));

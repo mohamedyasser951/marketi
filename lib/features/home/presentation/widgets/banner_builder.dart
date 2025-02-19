@@ -9,12 +9,11 @@ class BannerBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: ListView.separated(
+    return SizedBox(
+      height: 130.h,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: banners.length,
-        separatorBuilder: (context, index) => SizedBox(
-          width: 10.w,
-        ),
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: BannerItem(banner: banners[index]),
