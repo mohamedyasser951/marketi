@@ -28,10 +28,9 @@ class App extends StatelessWidget {
                 ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
           ),
           onGenerateRoute: AppRouting.onGenerteRoute,
-          initialRoute: AppRoutePaths.home,
+          initialRoute: AppRoutePaths.layout,
         ),
       ),
     );
   }
 }
-// http://192.168.1.9:8000/api/banners/

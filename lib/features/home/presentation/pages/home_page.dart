@@ -4,7 +4,6 @@ import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/Banners/banners_bloc_builder.dart';
 import 'package:marketi/features/home/presentation/widgets/Categories/categories_bloc_builder.dart';
-import 'package:marketi/features/home/presentation/widgets/Products/product_bloc_builder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

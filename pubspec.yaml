@@ -55,6 +55,11 @@ flutter_assets:
   output_path: lib/core/constants/
   filename: assets_images.dart
   field_prefix: null
+
+  fonts:
+    - family: IconBroken
+      fonts:
+        - asset: assets/fonts/icons.ttf 
   # fonts:
   #   - family: Schyler
   #     fonts:

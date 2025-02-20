@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/features/Auth/presentation/pages/sign_up_page.dart';
 import 'package:marketi/features/Auth/presentation/pages/login_page.dart';
+import 'package:marketi/features/MainLayout/presentation/pages/main_layout.dart';
 import 'package:marketi/features/home/presentation/pages/home_page.dart';
 import 'package:marketi/features/onBoarding/presentation/pages/on_boarding_page.dart';
 
@@ -15,6 +16,8 @@ abstract class AppRouting {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case AppRoutePaths.register:
         return MaterialPageRoute(builder: (_) => const SignUpPage());
+      case AppRoutePaths.layout:
+        return MaterialPageRoute(builder: (_) => const MainLayout());
       case AppRoutePaths.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       default:
