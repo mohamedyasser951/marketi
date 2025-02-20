@@ -17,18 +17,20 @@ class ProductsBlocBuilder extends StatelessWidget {
           current.status.isGetProductsError,
       builder: (context, state) {
         if (state.status.isGetProductsError) {
-          return Center(
-            child: Text(state.errorMessage),
+          return SliverToBoxAdapter(
+            child: Center(
+              child: Text(state.errorMessage),
+            ),
           );
         } else if (state.status.isGetProductsSuccess) {
           return ProductsBuilder(
             products: state.products,
           );
         } else {
-          return ShimmerLoading(widget: ProductLoading());
+          return SliverToBoxAdapter(
+              child: ShimmerLoading(widget: ProductLoading()));
         }
       },
     );
   }
 }
-

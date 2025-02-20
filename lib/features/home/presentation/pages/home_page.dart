@@ -18,22 +18,29 @@ class HomePage extends StatelessWidget {
         ..getCategories(),
       child: Scaffold(
         body: SafeArea(
-            child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: BannersBlocBuilder(),
-            ),
-            SliverToBoxAdapter(
-              child: CategoriesBlocBuilder(),
-            ),
-            SliverFillRemaining(
-              fillOverscroll: true,
-              child: ProductsBlocBuilder(),
-            ),
-          ],
-        )),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                automaticallyImplyLeading: false,
+                title: const Text("Marketi"),
+                centerTitle: true,
+                elevation: 0,
+                backgroundColor: Colors.white,
+              ),
+              SliverToBoxAdapter(
+                child: BannersBlocBuilder(),
+              ),
+              SliverToBoxAdapter(
+                child: CategoriesBlocBuilder(),
+              ),
+              // SliverToBoxAdapter(
+              //   child: ProductsBlocBuilder(),
+              // ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-

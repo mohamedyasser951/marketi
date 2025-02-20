@@ -48,7 +48,6 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
-
   Future<void> getProducts() async {
     emit(state.copyWith(status: HomeStatus.getProductsLoading));
     final result = await homeRepo.getProducts();
