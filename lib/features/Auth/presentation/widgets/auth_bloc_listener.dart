@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketi/core/network/dio_factory.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
+import 'package:marketi/features/MainLayout/presentation/pages/main_layout.dart';
 
 class AuthBlocListener extends StatelessWidget {
   const AuthBlocListener({super.key});
@@ -24,6 +26,13 @@ class AuthBlocListener extends StatelessWidget {
               content: Text("Logged In Successfully"),
             ),
           );
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const MainLayout()),
+              (route) => false);
+
+          DioFactory.sendTokenAfterUserLogin(state.token!);
+          print(state.token);
           // Navigator.pushNamedAndRemoveUntil(
           //     context, AppRoutePaths.home, (route) => false);
         }

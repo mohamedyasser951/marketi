@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/widgets/cache_network_image.dart';
+import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
 import 'package:marketi/features/cart/data/models/cart_item_model.dart';
+import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 
 class CartItem extends StatelessWidget {
   final CartItemModel cartItemModel;
@@ -54,7 +57,11 @@ class CartItem extends StatelessWidget {
                     Icons.delete,
                     color: Colors.red,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context
+                        .read<CartCubit>()
+                        .removeFromCart(cartId: cartItemModel.cartId);
+                  },
                 ),
                 Row(children: [
                   IconButton(
@@ -62,18 +69,31 @@ class CartItem extends StatelessWidget {
                       Icons.remove,
                       color: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartCubit>().updateCart(
+                          cartId: cartItemModel.cartId,
+                          addToCartRequestBody: AddToCartRequestBody(
+                              quantity: cartItemModel.quantity - 1,
+                              productId: cartItemModel.product.id));
+                    },
                   ),
                   Text(
                     cartItemModel.quantity.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   IconButton(
                     icon: const Icon(
                       Icons.add,
                       color: Colors.black,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<CartCubit>().updateCart(
+                          cartId: cartItemModel.cartId,
+                          addToCartRequestBody: AddToCartRequestBody(
+                              quantity: cartItemModel.quantity + 1,
+                              productId: cartItemModel.product.id));
+                    },
                   ),
                 ])
               ],

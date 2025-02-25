@@ -20,4 +20,15 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
           .toList(),
     );
 
-
+Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'description': instance.description,
+      'price': instance.price,
+      'discount_price': instance.discountPrice,
+      'category': instance.category,
+      'average_rating': instance.averageRating,
+      'primary_image_url': instance.productImage,
+      'gallery': instance.gallery,
+    };

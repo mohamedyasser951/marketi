@@ -6,6 +6,7 @@ import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/routing/app_routing.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
+import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -19,6 +20,7 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => getIt<AuthCubit>()),
+          BlocProvider(create: (context) => getIt<CartCubit>()..getCartItems()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

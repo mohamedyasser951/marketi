@@ -13,4 +13,10 @@ BannerModel _$BannerModelFromJson(Map<String, dynamic> json) => BannerModel(
       link: json['link'] as String,
     );
 
-
+Map<String, dynamic> _$BannerModelToJson(BannerModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'image': instance.image,
+      'title': instance.title,
+      'link': instance.link,
+    };

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_api_service.dart';
+part of 'cart_api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'home_api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
 
-class _HomeApiService implements HomeApiService {
-  _HomeApiService(this._dio, {this.baseUrl, this.errorLogger}) {
+class _CartApiService implements CartApiService {
+  _CartApiService(this._dio, {this.baseUrl, this.errorLogger}) {
     baseUrl ??= 'http://192.168.1.3:8000/api/';
   }
 
@@ -20,27 +20,27 @@ class _HomeApiService implements HomeApiService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<List<BannerModel>> getBanners() async {
+  Future<List<CartItemModel>> getCartItems() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<BannerModel>>(
+    final _options = _setStreamType<List<CartItemModel>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'banners/',
+            '/cart/',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<BannerModel> _value;
+    late List<CartItemModel> _value;
     try {
       _value = _result.data!
           .map(
-            (dynamic i) => BannerModel.fromJson(i as Map<String, dynamic>),
+            (dynamic i) => CartItemModel.fromJson(i as Map<String, dynamic>),
           )
           .toList();
     } on Object catch (e, s) {
@@ -51,29 +51,28 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<List<CategoryModel>> getCategories() async {
+  Future<CartItemModel> addToCart(
+    AddToCartRequestBody addToCartRequestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<CategoryModel>>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _data = <String, dynamic>{};
+    _data.addAll(addToCartRequestBody.toJson());
+    final _options = _setStreamType<CartItemModel>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/categories/',
+            '/cart/',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<CategoryModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CartItemModel _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => CategoryModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value = CartItemModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -82,34 +81,53 @@ class _HomeApiService implements HomeApiService {
   }
 
   @override
-  Future<List<ProductModel>> getProducts() async {
+  Future<CartItemModel> updateCart(
+    int cartId,
+    AddToCartRequestBody addToCartRequestBody,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ProductModel>>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _data = <String, dynamic>{};
+    _data.addAll(addToCartRequestBody.toJson());
+    final _options = _setStreamType<CartItemModel>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'products/',
+            '/cart//${cartId}/',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ProductModel> _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late CartItemModel _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value = CartItemModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<void> removeFromCart(int cartId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'PUT', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/cart//${cartId}/',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
