@@ -24,7 +24,7 @@ class DioFactory {
 
   static void addDioHeaders({String? token}) {
     //incase this User is logged in
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwNTE5NDY5LCJpYXQiOjE3NDA1MTkxNjksImp0aSI6ImI2ODg1MGI5ZmJmNDRiMTc5OGE0NGZkYjUwZWY1MmJjIiwidXNlcl9pZCI6N30.rzq6bHVO-fvedXwjOMpOIILYmAN36ZQEf61Rq0O9Jic";
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwNTI2ODc3LCJpYXQiOjE3NDA1MjY1NzcsImp0aSI6Ijg2NzhmMWZhNGNjOTQxZTJhNmNmNjE1OTVjMGQ4NmUzIiwidXNlcl9pZCI6N30.3mwaUys5KXF1AgXs96yULxqV8kuVvAVmbSQt-OEt2Qw";
     dio!.options.headers = {
       "Accept": "application/json",
       "Authorization": "Bearer $token"

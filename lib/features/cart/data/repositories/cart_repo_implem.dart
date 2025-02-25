@@ -1,3 +1,4 @@
+import 'package:marketi/core/network/api_error_handler.dart';
 import 'package:marketi/core/network/api_result.dart';
 import 'package:marketi/features/cart/data/datasources/remote/cart_api_service.dart';
 import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
@@ -14,7 +15,7 @@ class CartRepoImplem extends CartRepo {
     try {
       return ApiResult.success(await cartApiService.getCartItems());
     } catch (e) {
-      throw Exception("Failed to get cart items");
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 
@@ -25,8 +26,7 @@ class CartRepoImplem extends CartRepo {
       return ApiResult.success(
           await cartApiService.addToCart(addToCartRequestBody));
     } catch (e) {
-      print(e);
-      throw Exception("Failed to add to cart");
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 
@@ -35,8 +35,7 @@ class CartRepoImplem extends CartRepo {
     try {
       return ApiResult.success(cartApiService.removeFromCart(cartId));
     } catch (e) {
-      print(e);
-      throw Exception("Failed to remove from cart");
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 
@@ -47,8 +46,7 @@ class CartRepoImplem extends CartRepo {
       return ApiResult.success(
           await cartApiService.updateCart(cartId, addToCartRequestBody));
     } catch (e) {
-      print(e);
-      throw Exception("Failed to update cart");
+      return ApiResult.error(ErrorHandler.handle(e));
     }
   }
 }

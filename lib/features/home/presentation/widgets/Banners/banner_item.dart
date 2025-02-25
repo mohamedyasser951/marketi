@@ -15,7 +15,7 @@ class BannerItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: CachedNetworkImage(
-          height: 130.h,
+          height: 140.h,
           width: 250.w,
           fit: BoxFit.cover,
           errorWidget: (context, url, error) => Icon(Icons.error),

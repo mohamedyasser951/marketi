@@ -4,6 +4,7 @@ import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/Banners/banners_bloc_builder.dart';
 import 'package:marketi/features/home/presentation/widgets/Categories/categories_bloc_builder.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/product_bloc_builder.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -19,23 +20,17 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
           child: CustomScrollView(
             slivers: [
-              SliverAppBar(
+             const SliverAppBar(
                 pinned: true,
                 automaticallyImplyLeading: false,
-                title: const Text("Marketi"),
+                title: Text("Marketi"),
                 centerTitle: true,
                 elevation: 0,
                 backgroundColor: Colors.white,
               ),
-              SliverToBoxAdapter(
-                child: BannersBlocBuilder(),
-              ),
-              SliverToBoxAdapter(
-                child: CategoriesBlocBuilder(),
-              ),
-              // SliverToBoxAdapter(
-              //   child: ProductsBlocBuilder(),
-              // ),
+              SliverToBoxAdapter(child: BannersBlocBuilder()),
+              SliverToBoxAdapter(child: CategoriesBlocBuilder()),
+              const ProductsBlocBuilder(),
             ],
           ),
         ),

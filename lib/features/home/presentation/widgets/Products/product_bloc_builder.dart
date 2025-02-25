@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/widgets/shimmer_loading.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/Products/products_builder.dart';
-import 'package:marketi/features/home/presentation/widgets/Products/products_loading.dart';
 
 class ProductsBlocBuilder extends StatelessWidget {
   const ProductsBlocBuilder({super.key});
@@ -27,8 +25,8 @@ class ProductsBlocBuilder extends StatelessWidget {
             products: state.products,
           );
         } else {
-          return SliverToBoxAdapter(
-              child: ShimmerLoading(widget: ProductLoading()));
+          return SliverToBoxAdapter(child: CircularProgressIndicator());
+          // return ShimmerLoading(widget: ProductLoading());
         }
       },
     );

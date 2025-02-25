@@ -9,14 +9,15 @@ class ProductLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GridView.builder(
-          itemCount: 5,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 0.6, crossAxisSpacing: 10),
-          itemBuilder: (context, index) {
-            return ProductLoadingItem();
-          }),
+    return SliverGrid(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.6,
+      ),
+      delegate: SliverChildBuilderDelegate(
+        (context, index) => ProductLoadingItem(),
+        childCount: 8,
+      ),
     );
   }
 }

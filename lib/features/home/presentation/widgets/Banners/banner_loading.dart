@@ -8,14 +8,14 @@ class BannerLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130.h,
+      height: 140.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: Skeleton(
-            height: 130.h,
+            height: 140.h,
             width: 250.w,
           ),
         ),

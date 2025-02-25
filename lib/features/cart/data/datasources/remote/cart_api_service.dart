@@ -20,7 +20,7 @@ abstract class CartApiService {
   Future<CartItemModel> updateCart(@Path("cartId") int cartId,
       @Body() AddToCartRequestBody addToCartRequestBody);
 
-  @PUT("${ApiConstants.cart}/{cartId}/")
+  @DELETE("${ApiConstants.cart}/{cartId}/")
   Future<void> removeFromCart(
     @Path("cartId") int cartId,
   );
