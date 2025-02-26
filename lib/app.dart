@@ -7,6 +7,7 @@ import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/routing/app_routing.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -21,6 +22,8 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => getIt<AuthCubit>()),
           BlocProvider(create: (context) => getIt<CartCubit>()..getCartItems()),
+          BlocProvider(
+              create: (context) => getIt<FavoriteCubit>()..getFavorite())
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -30,7 +33,7 @@ class App extends StatelessWidget {
                 ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
           ),
           onGenerateRoute: AppRouting.onGenerteRoute,
-          initialRoute: AppRoutePaths.layout,
+          initialRoute: AppRoutePaths.login,
         ),
       ),
     );

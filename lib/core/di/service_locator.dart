@@ -9,6 +9,10 @@ import 'package:marketi/features/cart/data/datasources/remote/cart_api_service.d
 import 'package:marketi/features/cart/data/repositories/cart_repo.dart';
 import 'package:marketi/features/cart/data/repositories/cart_repo_implem.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:marketi/features/favorite/data/datasources/remote/favorite_api_services.dart';
+import 'package:marketi/features/favorite/data/repositories/favorite_repo.dart';
+import 'package:marketi/features/favorite/data/repositories/favorite_repo_implemp.dart';
+import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:marketi/features/home/data/datasources/remote/home_api_service.dart';
 import 'package:marketi/features/home/data/repositories/home_repo.dart';
 import 'package:marketi/features/home/data/repositories/home_repo_implem.dart';
@@ -22,17 +26,23 @@ void setupServiceLocator() {
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepo: getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(homeRepo: getIt()));
   getIt.registerFactory<CartCubit>(() => CartCubit(cartRepo: getIt()));
+  getIt.registerFactory<FavoriteCubit>(
+      () => FavoriteCubit(favoriteRepo: getIt()));
 
   //Repositories
-  getIt.registerSingleton<AuthRepo>(
-      AuthRepoImplem(authApiService: AuthApiService(dio)));
-  getIt.registerSingleton<HomeRepo>(
-      HomeRepoImplem(homeApiService: HomeApiService(dio)));
-  getIt.registerSingleton<CartRepo>(
-      CartRepoImplem(cartApiService: CartApiService(dio)));
+  getIt.registerLazySingleton<AuthRepo>(
+      () => AuthRepoImplem(authApiService: AuthApiService(dio)));
+  getIt.registerLazySingleton<HomeRepo>(
+      () => HomeRepoImplem(homeApiService: HomeApiService(dio)));
+  getIt.registerLazySingleton<CartRepo>(
+      () => CartRepoImplem(cartApiService: CartApiService(dio)));
+  getIt.registerLazySingleton<FavoriteRepo>(
+      () => FavoriteRepoImplemp(favoriteApiServices: getIt()));
 
   // Services
-  getIt.registerSingleton<AuthApiService>(AuthApiService(dio));
-  getIt.registerSingleton<HomeApiService>(HomeApiService(dio));
-  getIt.registerSingleton<CartApiService>(CartApiService(dio));
+  getIt.registerLazySingleton<AuthApiService>(() => AuthApiService(dio));
+  getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
+  getIt.registerLazySingleton<CartApiService>(() => CartApiService(dio));
+  getIt.registerLazySingleton<FavoriteApiServices>(
+      () => FavoriteApiServices(dio));
 }

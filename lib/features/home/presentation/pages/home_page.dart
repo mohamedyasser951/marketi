@@ -12,10 +12,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<HomeCubit>()
-        ..getProducts()
-        ..getBanners()
-        ..getCategories(),
+      create: (context) => getIt<HomeCubit>()..getProducts(),
+        // ..getProducts()
+        // ..getBanners()
+        // ..getCategories(),
       child: Scaffold(
         body: SafeArea(
           child: CustomScrollView(
@@ -29,8 +29,8 @@ class HomePage extends StatelessWidget {
                 leading: null,
                 backgroundColor: Colors.white,
               ),
-              SliverToBoxAdapter(child: BannersBlocBuilder()),
-              SliverToBoxAdapter(child: CategoriesBlocBuilder()),
+              // SliverToBoxAdapter(child: BannersBlocBuilder()),
+              // SliverToBoxAdapter(child: CategoriesBlocBuilder()),
               const ProductsBlocBuilder(),
             ],
           ),

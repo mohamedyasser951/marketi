@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
+import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
 
 class ProductItem extends StatelessWidget {
@@ -40,13 +41,20 @@ class ProductItem extends StatelessWidget {
                     Positioned(
                         top: 8,
                         right: 8,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 18,
-                          child: Icon(
-                            Icons.favorite,
-                            color: AppColors.darkBlueColor,
-                            size: 22,
+                        child: InkWell(
+                          onTap: () {
+                            context
+                                .read<FavoriteCubit>()
+                                .addToFavorite(product.id);
+                          },
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 18,
+                            child: Icon(
+                              Icons.favorite,
+                              color: AppColors.darkBlueColor,
+                              size: 22,
+                            ),
                           ),
                         ))
                   ],

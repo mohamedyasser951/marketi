@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/features/MainLayout/presentation/cubit/main_layout_cubit.dart';
 import 'package:marketi/features/cart/presentation/pages/cart_page.dart';
+import 'package:marketi/features/favorite/presentation/pages/favorite_page.dart';
 import 'package:marketi/features/home/presentation/pages/home_page.dart';
 
 class MainLayout extends StatelessWidget {
@@ -11,7 +12,7 @@ class MainLayout extends StatelessWidget {
   static final List<Widget> _pages = [
     HomePage(),
     CartPage(),
-    HomePage(),
+    FavoritePage(),
     HomePage(),
   ];
 
