@@ -26,6 +26,7 @@ class HomePage extends StatelessWidget {
                 title: Text("Marketi"),
                 centerTitle: true,
                 elevation: 0,
+                leading: null,
                 backgroundColor: Colors.white,
               ),
               SliverToBoxAdapter(child: BannersBlocBuilder()),

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
 import 'package:marketi/features/cart/data/models/cart_item_model.dart';
 import 'package:marketi/features/cart/data/repositories/cart_repo.dart';
-import 'package:marketi/features/cart/presentation/widgets/cart_item.dart';
 
 part 'cart_state.dart';
 
@@ -56,13 +55,5 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  double computeTotalPrice(List<CartItem> items) {
-    return items.fold<double>(
-      0.0,
-      (sum, item) =>
-          sum +
-          (int.parse(item.cartItemModel.product.price) *
-              item.cartItemModel.quantity),
-    );
-  }
+
 }

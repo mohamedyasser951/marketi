@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/widgets/cache_network_image.dart';
 import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
 import 'package:marketi/features/cart/data/models/cart_item_model.dart';
@@ -23,8 +24,8 @@ class CartItem extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.pink.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(20),
+              color: AppColors.lightBoderColor.withValues(alpha: 0.4),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,13 +33,19 @@ class CartItem extends StatelessWidget {
                 CacheNetworkImage(
                     height: 100.w,
                     width: 90.h,
+                    fit: BoxFit.contain,
                     imageUrl: cartItemModel.product.productImage!),
                 SizedBox(width: 10.w),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   spacing: 8.h,
                   children: [
-                    Text(cartItemModel.product.name),
+                    Expanded(
+                        child: Text(
+                      cartItemModel.product.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    )),
                     Text(cartItemModel.product.category),
                     Text(" ${cartItemModel.product.price}\$"),
                   ],
@@ -47,8 +54,8 @@ class CartItem extends StatelessWidget {
             ),
           ),
           Positioned(
-            right: 2,
-            top: 10,
+            right: 10,
+            top: 26,
             child: Column(
               spacing: 0,
               children: [
@@ -70,6 +77,7 @@ class CartItem extends StatelessWidget {
                       color: Colors.black,
                     ),
                     onPressed: () {
+                      if (cartItemModel.quantity == 1) return;
                       context.read<CartCubit>().updateCart(
                           cartId: cartItemModel.cartId,
                           addToCartRequestBody: AddToCartRequestBody(

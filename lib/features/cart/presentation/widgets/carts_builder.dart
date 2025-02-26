@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/features/cart/data/models/cart_item_model.dart';
@@ -11,15 +12,41 @@ class CartsBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return cartItems.isEmpty
-        ? Center(child: SvgPicture.asset(Assets.imagesCartEmpty))
+        ? EmptyCartView()
         : ListView.separated(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(12),
             itemCount: cartItems.length,
-            separatorBuilder: (context, index) => const Divider(),
+            separatorBuilder: (context, index) => SizedBox(height: 10),
             itemBuilder: (context, index) => CartItem(
               cartItemModel: cartItems[index],
             ),
           );
+  }
+}
+
+class EmptyCartView extends StatelessWidget {
+  const EmptyCartView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 25.h,
+            children: [
+          SvgPicture.asset(Assets.imagesCartEmpty),
+          Text(
+            "Your Cart is Empty",
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          Text(
+            "Check our big offers, fresh products\n and fill your cart with items",
+            style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.center,
+          )
+        ]));
   }
 }
