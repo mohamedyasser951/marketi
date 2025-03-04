@@ -28,7 +28,7 @@ class AuthBlocListener extends StatelessWidget {
           );
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const MainLayout()),
+              MaterialPageRoute(builder: (context) =>  MainLayout()),
               (route) => false);
 
           DioFactory.sendTokenAfterUserLogin(state.token!);

@@ -17,7 +17,7 @@ abstract class AppRouting {
       case AppRoutePaths.register:
         return MaterialPageRoute(builder: (_) => const SignUpPage());
       case AppRoutePaths.layout:
-        return MaterialPageRoute(builder: (_) => const MainLayout());
+        return MaterialPageRoute(builder: (_) =>  MainLayout());
       case AppRoutePaths.home:
         return MaterialPageRoute(builder: (_) => const HomePage());
       default:

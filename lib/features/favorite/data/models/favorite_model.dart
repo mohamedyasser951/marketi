@@ -18,6 +18,9 @@ class FavoriteModel extends Equatable {
       product: ProductModel.fromJson(json['product']),
       createdAt: json['created_at'],
     );
+
+    
+
   }
   @override
   List<Object?> get props => [id, product, createdAt];
