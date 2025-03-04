@@ -51,11 +51,12 @@ class _FavoriteApiServices implements FavoriteApiServices {
   }
 
   @override
-  Future<void> addToFavorite(int productId) async {
+  Future<void> addToFavorite(AddToFavoriteRequest addToFavoriteRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = productId;
+    final _data = <String, dynamic>{};
+    _data.addAll(addToFavoriteRequest.toJson());
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

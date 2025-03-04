@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/widgets/cache_network_image.dart';
+import 'package:marketi/features/favorite/data/models/favorite_model.dart';
 import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
-import 'package:marketi/features/home/data/models/product_model.dart';
 
 class FavoriteItem extends StatelessWidget {
-  final ProductModel product;
+  final FavoriteModel favoriteModel;
 
-  const FavoriteItem({super.key, required this.product});
+  const FavoriteItem({super.key, required this.favoriteModel});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +19,14 @@ class FavoriteItem extends StatelessWidget {
         height: 50.h,
         width: 50.w,
         fit: BoxFit.contain,
-        imageUrl: product.productImage!,
+        imageUrl: favoriteModel.product.productImage!,
       ),
-      title: Text(product.name),
-      subtitle: Text(product.description),
+      title: Text(favoriteModel.product.name),
+      subtitle: Text(
+        favoriteModel.product.description,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
       trailing: IconButton(
         icon: CircleAvatar(
           backgroundColor: Colors.white,
@@ -34,7 +38,7 @@ class FavoriteItem extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          context.read<FavoriteCubit>().removeFromFavorite(product.id);
+          context.read<FavoriteCubit>().removeFromFavorite(favoriteModel.id);
         },
       ),
     );

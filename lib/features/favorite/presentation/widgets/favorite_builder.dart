@@ -3,16 +3,16 @@ import 'package:marketi/features/favorite/data/models/favorite_model.dart';
 import 'package:marketi/features/favorite/presentation/widgets/favorite_item.dart';
 
 class FavoriteBuilder extends StatelessWidget {
-  final List<FavoriteModel> products;
-  const FavoriteBuilder({super.key, required this.products});
+  final List<FavoriteModel> favorite;
+  const FavoriteBuilder({super.key, required this.favorite});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(12),
-      itemCount: products.length,
+      itemCount: favorite.length,
       itemBuilder: (context, index) =>
-          FavoriteItem(product: products[index].product),
+          FavoriteItem(favoriteModel: favorite[index]),
     );
   }
 }

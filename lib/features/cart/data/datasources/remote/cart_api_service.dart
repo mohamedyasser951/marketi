@@ -21,9 +21,7 @@ abstract class CartApiService {
       @Body() AddToCartRequestBody addToCartRequestBody);
 
   @DELETE("${ApiConstants.cart}/{cartId}/")
-  Future<void> removeFromCart(
-    @Path("cartId") int cartId,
-  );
+  Future<void> removeFromCart(@Path("cartId") int cartId);
 }
 
 //  {

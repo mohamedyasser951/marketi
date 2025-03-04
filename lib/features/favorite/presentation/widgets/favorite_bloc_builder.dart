@@ -38,7 +38,7 @@ class FavoriteBlocBuilder extends StatelessWidget {
                     )
                   ]));
             }
-            return FavoriteBuilder(products: state.favorites);
+            return FavoriteBuilder(favorite: state.favorites);
           }
           return const Center(child: CircularProgressIndicator());
         });

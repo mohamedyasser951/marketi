@@ -1,6 +1,7 @@
 import 'package:marketi/core/network/api_error_handler.dart';
 import 'package:marketi/core/network/api_result.dart';
 import 'package:marketi/features/favorite/data/datasources/remote/favorite_api_services.dart';
+import 'package:marketi/features/favorite/data/models/add_to_favorites_request.dart';
 import 'package:marketi/features/favorite/data/models/favorite_model.dart';
 import 'package:marketi/features/favorite/data/repositories/favorite_repo.dart';
 
@@ -21,7 +22,7 @@ class FavoriteRepoImplemp extends FavoriteRepo {
   Future<ApiResult<void>> addToFavorite(int productId) async {
     try {
       return ApiResult.success(
-          await favoriteApiServices.addToFavorite(productId));
+          await favoriteApiServices.addToFavorite(AddToFavoriteRequest(productId: "$productId")));
     } catch (e) {
       return ApiResult.error(ErrorHandler.handle(e));
     }
