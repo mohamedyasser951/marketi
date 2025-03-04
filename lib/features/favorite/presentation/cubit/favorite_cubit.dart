@@ -13,9 +13,12 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     emit(state.copyWith(status: FavoriteStatus.loading));
     final result = await favoriteRepo.getFavorite();
     result.when(
-        success: (data) => emit(state.copyWith(status: FavoriteStatus.success,favorites: data)),
-        error: (errorModel) =>
-            emit(state.copyWith(status: FavoriteStatus.failure,errorMessage: errorModel.message)));
+        success: (data) {
+          emit(
+            FavoriteState(favorites: data, status: FavoriteStatus.success));
+        },
+        error: (errorModel) => emit(state.copyWith(
+            status: FavoriteStatus.failure, errorMessage: errorModel.message)));
   }
 
   Future<void> addToFavorite(int productId) async {

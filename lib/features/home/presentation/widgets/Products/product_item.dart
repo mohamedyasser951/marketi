@@ -41,22 +41,7 @@ class ProductItem extends StatelessWidget {
                     Positioned(
                         top: 8,
                         right: 8,
-                        child: InkWell(
-                          onTap: () {
-                            context
-                                .read<FavoriteCubit>()
-                                .addToFavorite(product.id);
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 18,
-                            child: Icon(
-                              Icons.favorite,
-                              color: AppColors.darkBlueColor,
-                              size: 22,
-                            ),
-                          ),
-                        ))
+                        child: AddToFavoriteWidget(product: product))
                   ],
                 ),
               ),
@@ -92,6 +77,65 @@ class ProductItem extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class AddToFavoriteWidget extends StatelessWidget {
+  const AddToFavoriteWidget({
+    super.key,
+    required this.product,
+  });
+
+  final ProductModel product;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FavoriteCubit, FavoriteState>(
+      buildWhen: (previous, current) => current.status.isSuccess,
+      builder: (context, state) {
+        bool inFavorites = false;
+        if (state.status.isSuccess && state.favorites.isNotEmpty) {
+          inFavorites = state.favorites
+              .any((element) => element.product.id == product.id);
+        }
+        return InkWell(
+          onTap: () {
+            if (!inFavorites) {
+              context.read<FavoriteCubit>().addToFavorite(product.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    backgroundColor: Colors.green,
+                    showCloseIcon: true,
+                    content: Text('${product.name} added to your Favorites!')),
+              );
+            } else {
+              int favoriteId = state.favorites
+                  .firstWhere((element) => element.product.id == product.id)
+                  .id;
+
+              context.read<FavoriteCubit>().removeFromFavorite(favoriteId);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    backgroundColor: Colors.redAccent,
+                    showCloseIcon: true,
+                    content:
+                        Text('${product.name} remove from your Favorites!')),
+              );
+            }
+          },
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 18,
+            child: Icon(
+              inFavorites ? Icons.favorite : Icons.favorite_border,
+              color: AppColors.darkBlueColor,
+              size: 22,
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

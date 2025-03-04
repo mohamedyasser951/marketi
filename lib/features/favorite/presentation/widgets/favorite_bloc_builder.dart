@@ -28,11 +28,11 @@ class FavoriteBlocBuilder extends StatelessWidget {
                       children: [
                     SvgPicture.asset(Assets.imagesCartEmpty),
                     Text(
-                      "Your Cart is Empty",
+                      "Your Favorite is Empty",
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     Text(
-                      "Check our big offers, fresh products\n and fill your cart with items",
+                      "Check our big offers, fresh products\n and fill your Favorites with items",
                       style: Theme.of(context).textTheme.bodyLarge,
                       textAlign: TextAlign.center,
                     )

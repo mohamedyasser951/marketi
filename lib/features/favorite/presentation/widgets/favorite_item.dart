@@ -13,33 +13,36 @@ class FavoriteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.all(8),
-      leading: CacheNetworkImage(
-        height: 50.h,
-        width: 50.w,
-        fit: BoxFit.contain,
-        imageUrl: favoriteModel.product.productImage!,
-      ),
-      title: Text(favoriteModel.product.name),
-      subtitle: Text(
-        favoriteModel.product.description,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-      ),
-      trailing: IconButton(
-        icon: CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 18,
-          child: Icon(
-            Icons.favorite,
-            color: AppColors.darkBlueColor,
-            size: 22,
-          ),
+    return Card(
+      color: AppColors.lightBlue700Color,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(8),
+        leading: CacheNetworkImage(
+          height: 70.h,
+          width: 60.w,
+          fit: BoxFit.contain,
+          imageUrl: favoriteModel.product.productImage!,
         ),
-        onPressed: () {
-          context.read<FavoriteCubit>().removeFromFavorite(favoriteModel.id);
-        },
+        title: Text(favoriteModel.product.name),
+        subtitle: Text(
+          favoriteModel.product.description,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: IconButton(
+          icon: CircleAvatar(
+            backgroundColor: Colors.white,
+            radius: 18,
+            child: Icon(
+              Icons.favorite,
+              color: AppColors.darkBlueColor,
+              size: 22,
+            ),
+          ),
+          onPressed: () {
+            context.read<FavoriteCubit>().removeFromFavorite(favoriteModel.id);
+          },
+        ),
       ),
     );
   }

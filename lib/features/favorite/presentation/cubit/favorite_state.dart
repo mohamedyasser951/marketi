@@ -33,5 +33,9 @@ class FavoriteState extends Equatable {
   }
 
   @override
-  List<Object> get props => [favorites, status];
+  List<Object> get props => [
+        favorites,
+        status,
+        errorMessage,
+      ];
 }
