@@ -43,6 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void logout() async {
+    
     final result = await authRepo.logout(token: state.accessToken!);
     result.when(
       success: (data) {

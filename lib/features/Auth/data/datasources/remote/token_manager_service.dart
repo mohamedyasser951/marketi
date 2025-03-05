@@ -4,6 +4,7 @@ abstract class TokenManagerService {
   Future<void> saveTokens({String? accessToken, String? refreshToken});
   Future<String?> getAccessToken();
   Future<String?> getRefreshToken();
+  Future <void> deleteTokens();
 }
 
 class TokenManagerServiceImplem implements TokenManagerService {
@@ -23,5 +24,10 @@ class TokenManagerServiceImplem implements TokenManagerService {
   @override
   Future<String?> getRefreshToken() {
     return storage.read(key: 'refreshToken');
+  }
+  
+  @override
+  Future<void> deleteTokens() {
+    return storage.deleteAll();
   }
 }

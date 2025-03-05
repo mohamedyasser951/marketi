@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/widgets/confirm_dialog.dart';
+import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 
 class Commons {
   static void showErrorDialog(BuildContext context, String message) {
@@ -20,12 +23,9 @@ class Commons {
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.black,
                         textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            
-                            fontSize: 14)),
+                            fontWeight: FontWeight.bold, fontSize: 14)),
                     onPressed: () => Navigator.of(context).pop(),
-                    child:
-                        Text("Ok")),
+                    child: Text("Ok")),
               ],
             ));
   }
@@ -40,14 +40,15 @@ class Commons {
   //   );
   // }
 
-  // static Future<void> showLogoutDialog(BuildContext context) async {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) => ConfirmationDialog(
-  //           alertMsg:
-  //               AppLocalizations.of(context)!.translate('want_to_logout')!,
-  //           onTapConfirm: () {}));
-  // }
+  static Future<void> showLogoutDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => ConfirmationDialog(
+            alertMsg: 'Are you sure you want to logout',
+            onTapConfirm: () {
+              getIt<AuthCubit>().logout();
+            }));
+  }
 
   // static Future<void> openUrl(String urlLink) async {
   //   final Uri url = Uri.parse(urlLink);

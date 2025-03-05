@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/network/app_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

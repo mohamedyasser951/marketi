@@ -5,6 +5,7 @@ import 'package:marketi/features/MainLayout/presentation/cubit/main_layout_cubit
 import 'package:marketi/features/cart/presentation/pages/cart_page.dart';
 import 'package:marketi/features/favorite/presentation/pages/favorite_page.dart';
 import 'package:marketi/features/home/presentation/pages/home_page.dart';
+import 'package:marketi/features/settings/presentation/pages/profile_page.dart';
 
 class MainLayout extends StatelessWidget {
   MainLayout({super.key});
@@ -13,7 +14,7 @@ class MainLayout extends StatelessWidget {
     HomePage(),
     CartPage(),
     FavoritePage(),
-    HomePage(),
+    ProfilePage(),
   ];
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
