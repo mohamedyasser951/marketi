@@ -10,7 +10,7 @@ part of 'profile_api_service.dart';
 
 class _ProfileApiService implements ProfileApiService {
   _ProfileApiService(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.23:8000/api/';
+    baseUrl ??= 'http://192.168.1.3:8000/api/';
   }
 
   final Dio _dio;

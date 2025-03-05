@@ -18,10 +18,6 @@ class Assets {
   /// assets/images/feedback.svg
   static const String imagesFeedback = "assets/images/feedback.svg";
 
-  /// Assets for imagesForgotPasswordWithEmail
-  /// assets/images/forgot_password_with_email.svg
-  static const String imagesForgotPasswordWithEmail = "assets/images/forgot_password_with_email.svg";
-
   /// Assets for imagesForgotPasswordWithHhone
   /// assets/images/forgot_password_with_hhone.svg
   static const String imagesForgotPasswordWithHhone = "assets/images/forgot_password_with_hhone.svg";

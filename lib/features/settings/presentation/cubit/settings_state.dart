@@ -1,7 +1,12 @@
 part of 'settings_cubit.dart';
 
 enum SettingsStatus { initial, loading, success, error }
-
+extension SettingsStatusX on SettingsStatus {
+  bool get isInitial => this == SettingsStatus.initial;
+  bool get isLoading => this == SettingsStatus.loading;
+  bool get isSuccess => this == SettingsStatus.success;
+  bool get isError => this == SettingsStatus.error;
+}
 class SettingsState extends Equatable {
   const SettingsState({
     this.status = SettingsStatus.initial,
