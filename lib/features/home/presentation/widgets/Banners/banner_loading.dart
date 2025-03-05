@@ -8,8 +8,8 @@ class BannerLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140.h,
-      child: ListView.builder(
+      height: 160.h,
+      child: PageView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 5,
         itemBuilder: (context, index) => Padding(

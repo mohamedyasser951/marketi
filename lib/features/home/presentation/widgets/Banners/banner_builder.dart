@@ -10,9 +10,10 @@ class BannerBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 140.h,
-      child: ListView.builder(
+      height: 160.h,
+      child: PageView.builder(
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         itemCount: banners.length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8.0),

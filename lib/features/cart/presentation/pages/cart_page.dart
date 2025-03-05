@@ -29,8 +29,8 @@ class _CartPageState extends State<CartPage> {
         ),
         bottomSheet: BottomCheckoutView(),
         body: BlocBuilder<CartCubit, CartState>(
-            // buildWhen: (previous, current) =>
-            //     current.status.isSuccess || current.status.isError,
+            buildWhen: (previous, current) =>
+                current.status.isSuccess || current.status.isError,
             builder: (context, state) {
           if (state.status.isError) {
             return Center(

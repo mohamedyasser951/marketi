@@ -7,6 +7,7 @@ import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart'
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/products_details.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductModel product;
@@ -15,68 +16,75 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Card(
-        color: Colors.white,
-        elevation: 10,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          child: Column(
-            spacing: 4.h,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Card(
-                        color: AppColors.lightBlue700Color,
-                        child: AspectRatio(
-                          aspectRatio: 170 / 200,
-                          child: CachedNetworkImage(
-                            height: 170,
-                            width: 200,
-                            fit: BoxFit.contain,
-                            imageUrl: product.productImage!,
-                          ),
-                        )),
-                    Positioned(
-                        top: 8,
-                        right: 8,
-                        child: AddToFavoriteWidget(product: product))
-                  ],
-                ),
-              ),
-              Row(
-                children: [
-                  Text("${product.price} LE", style: textTheme.bodyLarge),
-                  Spacer(),
-                  Row(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ProductsDetails(productModel: product);
+        }));
+      },
+      child: Card(
+          color: Colors.white,
+          elevation: 10,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Column(
+              spacing: 4.h,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Stack(
                     children: [
-                      Text(
-                        (product.averageRating).toStringAsFixed(1),
-                        style: textTheme.bodyLarge,
-                      ),
-                      Icon(
-                        Icons.star_border,
-                        color: AppColors.darkBlueColor,
-                        size: 16,
-                      ),
+                      Card(
+                          color: AppColors.lightBlue700Color,
+                          child: AspectRatio(
+                            aspectRatio: 170 / 200,
+                            child: CachedNetworkImage(
+                              height: 170,
+                              width: 200,
+                              fit: BoxFit.contain,
+                              imageUrl: product.productImage!,
+                            ),
+                          )),
+                      Positioned(
+                          top: 8,
+                          right: 8,
+                          child: AddToFavoriteWidget(product: product))
                     ],
                   ),
-                ],
-              ),
-              Expanded(
-                  child: Text(
-                product.name,
-                style: textTheme.bodyLarge,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              )),
-              AddTCartWidget(
-                product: product,
-              )
-            ],
-          ),
-        ));
+                ),
+                Row(
+                  children: [
+                    Text("${product.price} LE", style: textTheme.bodyLarge),
+                    Spacer(),
+                    Row(
+                      children: [
+                        Text(
+                          (product.averageRating).toStringAsFixed(1),
+                          style: textTheme.bodyLarge,
+                        ),
+                        Icon(
+                          Icons.star_border,
+                          color: AppColors.darkBlueColor,
+                          size: 16,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Expanded(
+                    child: Text(
+                  product.name,
+                  style: textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                )),
+                AddTCartWidget(
+                  product: product,
+                )
+              ],
+            ),
+          )),
+    );
   }
 }
 
