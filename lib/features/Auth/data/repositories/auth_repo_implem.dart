@@ -1,5 +1,6 @@
 import 'package:marketi/core/network/api_error_handler.dart';
 import 'package:marketi/core/network/api_result.dart';
+import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/data/datasources/remote/auth_api_service.dart';
 import 'package:marketi/features/Auth/data/models/login_request_body.dart';
 import 'package:marketi/features/Auth/data/models/login_response_body.dart';
@@ -9,8 +10,9 @@ import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 
 class AuthRepoImplem extends AuthRepo {
   AuthApiService authApiService;
-
-  AuthRepoImplem({required this.authApiService});
+  AuthLocalDataSource authLocalDataSource;
+  AuthRepoImplem(
+      {required this.authApiService, required this.authLocalDataSource});
 
   @override
   Future<ApiResult<LoginResponseBody>> login(
@@ -35,9 +37,15 @@ class AuthRepoImplem extends AuthRepo {
   @override
   Future<ApiResult<void>> logout({required String token}) async {
     try {
+      await authLocalDataSource.deleteTokens();
       return ApiResult.success(await authApiService.logout(token));
     } catch (e) {
       return ApiResult.error(ErrorHandler.handle(e));
     }
+  }
+
+  @override
+  Future<String?> getUserToken() async {
+    return authLocalDataSource.getAccessToken();
   }
 }

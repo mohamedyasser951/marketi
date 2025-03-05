@@ -29,7 +29,7 @@ class _FavoriteApiServices implements FavoriteApiServices {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/favorites/',
+            'favorites/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -61,7 +61,7 @@ class _FavoriteApiServices implements FavoriteApiServices {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/favorites/',
+            'favorites/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -80,7 +80,7 @@ class _FavoriteApiServices implements FavoriteApiServices {
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/favorites//${productId}/',
+            'favorites//${productId}/',
             queryParameters: queryParameters,
             data: _data,
           )

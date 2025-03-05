@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/utils/common.dart';
-import 'package:marketi/features/Auth/data/datasources/remote/token_manager_service.dart';
+import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:marketi/features/Auth/presentation/pages/login_page.dart';
 
@@ -59,22 +57,27 @@ class ProfileBody extends StatelessWidget {
         BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.status.isError) {
-             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.message)));
             }
             if (state.status == AuthStatus.loggedOut) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged Out Successfully")));
-              getIt.get<TokenManagerService>().deleteTokens();
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginPage()), (route) => false);
+              ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Logged Out Successfully")));
+              getIt.get<AuthLocalDataSource>().deleteTokens();
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  (route) => false);
             }
           },
           child: ListTile(
-                  onTap: () {
-                    Commons.showLogoutDialog(context);
-                  },
-                  leading: SvgPicture.asset(Assets.imagesLogOut),
-                  title: const Text("Log Out"),
-                  trailing: const Icon(CupertinoIcons.right_chevron),
-                ),
+            onTap: () {
+              Commons.showLogoutDialog(context);
+            },
+            leading: SvgPicture.asset(Assets.imagesLogOut),
+            title: const Text("Log Out"),
+            trailing: const Icon(CupertinoIcons.right_chevron),
+          ),
         ),
       ],
     );

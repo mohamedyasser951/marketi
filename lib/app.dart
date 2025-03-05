@@ -20,7 +20,7 @@ class App extends StatelessWidget {
         splitScreenMode: true,
         child: MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => getIt<AuthCubit>()),
+            BlocProvider(create: (context) => getIt<AuthCubit>()..init()),
             BlocProvider(create: (context) => getIt<CartCubit>()),
             BlocProvider(create: (context) => getIt<FavoriteCubit>())
           ],
@@ -32,7 +32,7 @@ class App extends StatelessWidget {
                   ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
             ),
             onGenerateRoute: AppRouting.onGenerteRoute,
-            initialRoute: AppRouting.isUserLoggedIn() ? AppRoutePaths.layout : AppRoutePaths.login,
+            initialRoute: AppRoutePaths.splashPage,
           ),
         ));
   }

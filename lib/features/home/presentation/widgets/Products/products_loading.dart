@@ -11,8 +11,8 @@ class ProductLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.6,
+       crossAxisCount: 2,
+        childAspectRatio: 0.57,
       ),
       delegate: SliverChildBuilderDelegate(
         (context, index) => ProductLoadingItem(),

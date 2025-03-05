@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/network/dio_factory.dart';
-import 'package:marketi/features/Auth/data/datasources/remote/token_manager_service.dart';
+import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:marketi/features/MainLayout/presentation/pages/main_layout.dart';
 
@@ -42,7 +42,7 @@ class AuthBlocListener extends StatelessWidget {
   void saveUserToken(AuthState state) {
     DioFactory.sendTokenAfterUserLogin(state.accessToken!);
 
-    getIt<TokenManagerService>().saveTokens(
+    getIt<AuthLocalDataSource>().saveTokens(
         accessToken: state.accessToken, refreshToken: state.refreshToken!);
   }
 }

@@ -9,10 +9,10 @@ abstract class ApiConstants {
 
   // product
   static const String products = 'products/';
-  static const String categories = '/categories/';
+  static const String categories = 'categories/';
   static const String banners = 'banners/';
-  static const String favorites = '/favorites/';
-  static const String cart = '/cart/';
+  static const String favorites = 'favorites/';
+  static const String cart = 'cart/';
 
   static String getFullUrl(String endpoint) =>
       '${ApiConstants.baseUrl}$endpoint';

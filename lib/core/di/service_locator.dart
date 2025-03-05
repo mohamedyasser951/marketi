@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marketi/core/network/dio_factory.dart';
-import 'package:marketi/features/Auth/data/datasources/remote/token_manager_service.dart';
+import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/data/datasources/remote/auth_api_service.dart';
 import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 import 'package:marketi/features/Auth/data/repositories/auth_repo_implem.dart';
@@ -38,12 +38,12 @@ void setupServiceLocator() {
       () => SettingsCubit(profileRepo: getIt()));
 
   //Repositories
-  getIt.registerLazySingleton<AuthRepo>(
-      () => AuthRepoImplem(authApiService: AuthApiService(dio)));
+  getIt.registerLazySingleton<AuthRepo>(() =>
+      AuthRepoImplem(authApiService: getIt(), authLocalDataSource: getIt()));
   getIt.registerLazySingleton<HomeRepo>(
-      () => HomeRepoImplem(homeApiService: HomeApiService(dio)));
+      () => HomeRepoImplem(homeApiService: getIt()));
   getIt.registerLazySingleton<CartRepo>(
-      () => CartRepoImplem(cartApiService: CartApiService(dio)));
+      () => CartRepoImplem(cartApiService: getIt()));
   getIt.registerLazySingleton<FavoriteRepo>(
       () => FavoriteRepoImplemp(favoriteApiServices: getIt()));
   getIt.registerLazySingleton<ProfileRepo>(
@@ -56,6 +56,6 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<FavoriteApiServices>(
       () => FavoriteApiServices(dio));
   getIt.registerLazySingleton<ProfileApiService>(() => ProfileApiService(dio));
-  getIt.registerLazySingleton<TokenManagerService>(
-      () => TokenManagerServiceImplem());
+  getIt.registerLazySingleton<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImplem());
 }

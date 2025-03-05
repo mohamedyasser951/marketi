@@ -10,13 +10,25 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authRepo})
       : super(const AuthState(status: AuthStatus.initial));
 
+  Future<void> init() async {
+    final token = await authRepo.getUserToken();
+    if (token != null) {
+      emit(state.copyWith(status: AuthStatus.loggedIn, accessToken: token));
+    } else {
+      emit(state.copyWith(status: AuthStatus.loggedOut));
+    }
+  }
+
   void login({required String email, required String password}) async {
     emit(state.copyWith(status: AuthStatus.loading));
     final result = await authRepo.login(
         loginRequestBody: LoginRequestBody(email: email, password: password));
     result.when(
       success: (data) {
-        emit(state.copyWith(status: AuthStatus.loggedIn, accessToken: data.access,refreshToken: data.refresh));
+        emit(state.copyWith(
+            status: AuthStatus.loggedIn,
+            accessToken: data.access,
+            refreshToken: data.refresh));
       },
       error: (errorModel) {
         emit(state.copyWith(
@@ -32,7 +44,9 @@ class AuthCubit extends Cubit<AuthState> {
     result.when(
       success: (data) {
         emit(state.copyWith(
-            status: AuthStatus.loggedIn, accessToken: data.accessToken,refreshToken: data.refreshToken));
+            status: AuthStatus.loggedIn,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken));
       },
       error: (errorModel) {
         emit(state.copyWith(
@@ -43,7 +57,6 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void logout() async {
-    
     final result = await authRepo.logout(token: state.accessToken!);
     result.when(
       success: (data) {

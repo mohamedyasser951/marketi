@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/network/api_constant.dart';
 import 'package:marketi/core/utils/common.dart';
-import 'package:marketi/features/Auth/data/datasources/remote/token_manager_service.dart';
+import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/data/models/refresh_token_response.dart';
 
 class AppIntercepters extends Interceptor {
@@ -46,7 +46,7 @@ class AppIntercepters extends Interceptor {
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     if (err.response?.statusCode == 401) {
       String? refreshTokenText =
-          await getIt<TokenManagerService>().getRefreshToken();
+          await getIt<AuthLocalDataSource>().getRefreshToken();
 
       if (refreshTokenText != null) {
         if (await refreshToken()) {
@@ -69,7 +69,7 @@ class AppIntercepters extends Interceptor {
   }
 
   Future<bool> refreshToken() async {
-    String? refreshToken = await getIt<TokenManagerService>().getRefreshToken();
+    String? refreshToken = await getIt<AuthLocalDataSource>().getRefreshToken();
     final response = await client.post(ApiConstants.tokenRefresh, data: {
       'refresh': refreshToken,
     });
@@ -80,7 +80,7 @@ class AppIntercepters extends Interceptor {
       // authenticatedUser.token = baseResponse.data["token"];
       // authenticatedUser.refreshToken = baseResponse.data["refreshToken"];
       // authLocalDataSource.saveLoginCredentials(userModel: authenticatedUser);
-      getIt<TokenManagerService>().saveTokens(
+      getIt<AuthLocalDataSource>().saveTokens(
           accessToken: refreshTokenResponse.accessToken,
           refreshToken: refreshToken);
       return true;

@@ -98,8 +98,24 @@ class AddToFavoriteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCubit, FavoriteState>(
-      buildWhen: (previous, current) => current.status.isSuccess,
+    return BlocConsumer<FavoriteCubit, FavoriteState>(
+      buildWhen: (previous, current) =>
+          current.status.isSuccess || current.status.isFailure,
+      listener: (context, state) {
+        if (state.status.isFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              action: SnackBarAction(
+                label: 'Retry',
+                onPressed: () {
+                  context.read<FavoriteCubit>().getFavorite();
+                },
+              ),
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         bool inFavorites = false;
         if (state.status.isSuccess && state.favorites.isNotEmpty) {

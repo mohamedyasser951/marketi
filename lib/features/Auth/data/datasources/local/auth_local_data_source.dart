@@ -1,13 +1,13 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-abstract class TokenManagerService {
+abstract class AuthLocalDataSource {
   Future<void> saveTokens({String? accessToken, String? refreshToken});
   Future<String?> getAccessToken();
   Future<String?> getRefreshToken();
   Future <void> deleteTokens();
 }
 
-class TokenManagerServiceImplem implements TokenManagerService {
+class AuthLocalDataSourceImplem implements AuthLocalDataSource {
   final FlutterSecureStorage storage = FlutterSecureStorage();
 
   @override
