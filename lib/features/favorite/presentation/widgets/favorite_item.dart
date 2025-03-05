@@ -14,7 +14,7 @@ class FavoriteItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.lightBlue700Color,
+      color: AppColors.lightBoderColor.withValues(alpha: 0.3),
       child: ListTile(
         contentPadding: const EdgeInsets.all(8),
         leading: CacheNetworkImage(

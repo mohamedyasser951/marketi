@@ -15,27 +15,25 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => getIt<AuthCubit>()),
-          BlocProvider(create: (context) => getIt<CartCubit>()..getCartItems()),
-          BlocProvider(
-              create: (context) => getIt<FavoriteCubit>()..getFavorite())
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            useMaterial3: true,
-            colorScheme:
-                ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => getIt<AuthCubit>()),
+            BlocProvider(create: (context) => getIt<CartCubit>()),
+            BlocProvider(create: (context) => getIt<FavoriteCubit>())
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              useMaterial3: true,
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+            ),
+            onGenerateRoute: AppRouting.onGenerteRoute,
+            initialRoute: AppRouting.isUserLoggedIn() ? AppRoutePaths.layout : AppRoutePaths.login,
           ),
-          onGenerateRoute: AppRouting.onGenerteRoute,
-          initialRoute: AppRoutePaths.layout,
-        ),
-      ),
-    );
+        ));
   }
 }

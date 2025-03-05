@@ -15,7 +15,7 @@ class CartsBuilder extends StatelessWidget {
         ? EmptyCartView()
         : ListView.separated(
             physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.all(12),
+            padding: EdgeInsets.only(top: 12, right: 12, left: 12, bottom: 120),
             itemCount: cartItems.length,
             separatorBuilder: (context, index) => SizedBox(height: 10),
             itemBuilder: (context, index) => CartItem(

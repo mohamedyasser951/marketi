@@ -16,7 +16,7 @@ class AuthCubit extends Cubit<AuthState> {
         loginRequestBody: LoginRequestBody(email: email, password: password));
     result.when(
       success: (data) {
-        emit(state.copyWith(status: AuthStatus.loggedIn, token: data.access));
+        emit(state.copyWith(status: AuthStatus.loggedIn, accessToken: data.access,refreshToken: data.refresh));
       },
       error: (errorModel) {
         emit(state.copyWith(
@@ -32,7 +32,7 @@ class AuthCubit extends Cubit<AuthState> {
     result.when(
       success: (data) {
         emit(state.copyWith(
-            status: AuthStatus.loggedIn, token: data.accessToken));
+            status: AuthStatus.loggedIn, accessToken: data.accessToken,refreshToken: data.refreshToken));
       },
       error: (errorModel) {
         emit(state.copyWith(
@@ -43,7 +43,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   void logout() async {
-    final result = await authRepo.logout(token: state.token!);
+    final result = await authRepo.logout(token: state.accessToken!);
     result.when(
       success: (data) {
         emit(state.copyWith(status: AuthStatus.loggedOut));

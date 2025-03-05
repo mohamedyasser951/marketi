@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/network/app_interceptors.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {
@@ -12,8 +14,10 @@ class DioFactory {
       dio!.options
         ..connectTimeout = timeout
         ..receiveTimeout = timeout;
+
       addInterceptors();
       addDioHeaders();
+      dio!.interceptors.add(AppIntercepters(client: dio!));
     }
     return dio!;
   }
@@ -22,9 +26,9 @@ class DioFactory {
     dio!.options.headers = {"Authorization": "Bearer $token"};
   }
 
-  static void addDioHeaders({String? token}) {
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQxMTQ3MDAzLCJpYXQiOjE3NDExMTEwMDMsImp0aSI6IjVjZjFhZTMwZDVkZDQ5OTU5YmFjMmM5NTJjYWIxYTMwIiwidXNlcl9pZCI6N30.7WbXUCe4JUOTQ4Y43ldzCHkGji8Y7kFmhKnvyihJW00";
-    //incase this User is logged in
+  static void addDioHeaders() async {
+    String? token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQxMjA0OTQ3LCJpYXQiOjE3NDExNjg5NDcsImp0aSI6ImYwNGM0YzYxZWI3NzQxM2ZhYTMzN2M0NGFmNWYxYmZjIiwidXNlcl9pZCI6N30.iJIF9B1nxB9T8FgOzhJ0Lrt10U9j504vxiA-K_ryKog";
+    print(token);
     dio!.options.headers = {
       "Accept": "application/json",
       "Authorization": "Bearer $token"

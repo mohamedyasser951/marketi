@@ -12,27 +12,32 @@ extension AuthStatusX on AuthStatus {
 
 class AuthState extends Equatable {
   final AuthStatus status;
-  final String? token;
+  final String? refreshToken;
+  final String? accessToken;
+
   final String message;
 
   const AuthState({
     this.status = AuthStatus.initial,
-    this.token,
+    this.refreshToken,
+    this.accessToken,
     this.message = '',
   });
 
   AuthState copyWith({
     AuthStatus? status,
-    String? token,
+    String? refreshToken,
+    String? accessToken,
     String? message,
   }) {
     return AuthState(
       status: status ?? this.status,
-      token: token ?? this.token,
+      refreshToken: refreshToken ?? this.refreshToken,
+      accessToken: accessToken ?? this.accessToken,
       message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [status, token, message];
+  List<Object?> get props => [status, refreshToken, accessToken, message];
 }

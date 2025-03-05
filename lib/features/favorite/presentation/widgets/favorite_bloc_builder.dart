@@ -12,8 +12,8 @@ class FavoriteBlocBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoriteCubit, FavoriteState>(
-        buildWhen: (previous, current) =>
-            current.status.isSuccess || current.status.isFailure,
+        // buildWhen: (previous, current) =>
+        //     current.status.isSuccess || current.status.isFailure,
         builder: (context, state) {
           if (state.status.isFailure) {
             return Center(

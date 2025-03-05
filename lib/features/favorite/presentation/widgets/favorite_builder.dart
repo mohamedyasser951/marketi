@@ -9,7 +9,8 @@ class FavoriteBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: const EdgeInsets.all(8),
+      physics: BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(12),
       itemCount: favorite.length,
       itemBuilder: (context, index) =>
           FavoriteItem(favoriteModel: favorite[index]),

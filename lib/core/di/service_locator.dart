@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:marketi/core/network/dio_factory.dart';
+import 'package:marketi/features/Auth/data/datasources/remote/token_manager_service.dart';
 import 'package:marketi/features/Auth/data/datasources/remote/auth_api_service.dart';
 import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 import 'package:marketi/features/Auth/data/repositories/auth_repo_implem.dart';
@@ -22,6 +23,7 @@ GetIt getIt = GetIt.instance;
 
 void setupServiceLocator() {
   Dio dio = DioFactory.getDio();
+
   //Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepo: getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(homeRepo: getIt()));
@@ -45,4 +47,7 @@ void setupServiceLocator() {
   getIt.registerLazySingleton<CartApiService>(() => CartApiService(dio));
   getIt.registerLazySingleton<FavoriteApiServices>(
       () => FavoriteApiServices(dio));
+  getIt.registerLazySingleton<TokenManagerService>(
+      () => TokenManagerServiceImplem());
+
 }

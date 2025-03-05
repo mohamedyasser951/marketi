@@ -18,6 +18,9 @@ abstract class AuthApiService {
   Future<SignupResponseBody> signup(
       @Body() SignupRequestBody signupRequestBody);
 
+
+
+
   @POST(ApiConstants.logout)
   Future<void> logout(@Header("Authorization") String token);
 }

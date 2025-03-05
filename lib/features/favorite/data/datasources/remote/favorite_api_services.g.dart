@@ -10,7 +10,7 @@ part of 'favorite_api_services.dart';
 
 class _FavoriteApiServices implements FavoriteApiServices {
   _FavoriteApiServices(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??= 'http://192.168.1.3:8000/api/';
+    baseUrl ??= 'http://192.168.1.23:8000/api/';
   }
 
   final Dio _dio;

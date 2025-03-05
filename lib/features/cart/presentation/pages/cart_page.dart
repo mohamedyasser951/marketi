@@ -6,8 +6,19 @@ import 'package:marketi/features/cart/data/models/cart_item_model.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/cart/presentation/widgets/carts_builder.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
+
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  @override
+  void initState() {
+    BlocProvider.of<CartCubit>(context).getCartItems();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +29,19 @@ class CartPage extends StatelessWidget {
         ),
         bottomSheet: BottomCheckoutView(),
         body: BlocBuilder<CartCubit, CartState>(
-            buildWhen: (previous, current) =>
-                current.status.isSuccess || current.status.isError,
+            // buildWhen: (previous, current) =>
+            //     current.status.isSuccess || current.status.isError,
             builder: (context, state) {
-              if (state.status.isError) {
-                return Center(
-                  child: Text(state.errorMessage),
-                );
-              } else if (state.status.isSuccess) {
-                return CartsBuilder(cartItems: state.cartItems);
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }));
+          if (state.status.isError) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
+          } else if (state.status.isSuccess) {
+            return CartsBuilder(cartItems: state.cartItems);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        }));
   }
 }
 
