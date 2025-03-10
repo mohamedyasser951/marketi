@@ -17,11 +17,7 @@ class ProductsBlocBuilder extends StatelessWidget {
           current.status.isGetProductsError,
       builder: (context, state) {
         if (state.status.isGetProductsError) {
-          return SliverToBoxAdapter(
-            child: Center(
-              child: Text(state.errorMessage),
-            ),
-          );
+          return SliverToBoxAdapter(child: SizedBox.shrink());
         } else if (state.status.isGetProductsSuccess) {
           return ProductsBuilder(
             products: state.products,

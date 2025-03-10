@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
+import 'package:marketi/core/helper/extensions.dart';
 import 'package:marketi/features/Auth/presentation/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
@@ -26,7 +27,7 @@ class LoginPage extends StatelessWidget {
                   Text("Are you new in Marketi"),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutePaths.register);
+                        context.pushNamed(AppRoutePaths.register);
                       },
                       child: Text("Sign Up"))
                 ],

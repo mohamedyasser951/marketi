@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
                 leading: null,
                 backgroundColor: Colors.white,
               ),
+             
               SliverToBoxAdapter(child: BannersBlocBuilder()),
               CategorySeeAll(),
               SliverToBoxAdapter(child: CategoriesBlocBuilder()),

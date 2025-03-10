@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/constants/constants.dart';
+import 'package:marketi/core/helper/shared_pref_helper.dart';
 import 'package:marketi/core/network/api_constant.dart';
 import 'package:marketi/core/utils/common.dart';
-import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/data/models/refresh_token_response.dart';
 
 class AppIntercepters extends Interceptor {
@@ -46,7 +46,7 @@ class AppIntercepters extends Interceptor {
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     if (err.response?.statusCode == 401) {
       String? refreshTokenText =
-          await getIt<AuthLocalDataSource>().getRefreshToken();
+          SharedPrefHelper.getSecuredString(SharedPrefKeys.userRefreshToken);
 
       if (refreshTokenText != null) {
         if (await refreshToken()) {
@@ -69,7 +69,8 @@ class AppIntercepters extends Interceptor {
   }
 
   Future<bool> refreshToken() async {
-    String? refreshToken = await getIt<AuthLocalDataSource>().getRefreshToken();
+    String? refreshToken =
+        SharedPrefHelper.getSecuredString(SharedPrefKeys.userRefreshToken);
     final response = await client.post(ApiConstants.tokenRefresh, data: {
       'refresh': refreshToken,
     });
@@ -80,9 +81,9 @@ class AppIntercepters extends Interceptor {
       // authenticatedUser.token = baseResponse.data["token"];
       // authenticatedUser.refreshToken = baseResponse.data["refreshToken"];
       // authLocalDataSource.saveLoginCredentials(userModel: authenticatedUser);
-      getIt<AuthLocalDataSource>().saveTokens(
-          accessToken: refreshTokenResponse.accessToken,
-          refreshToken: refreshToken);
+      SharedPrefHelper.setSecuredString(
+          SharedPrefKeys.userToken, refreshTokenResponse.accessToken);
+
       return true;
     } else {
       return false;

@@ -133,25 +133,17 @@ class _SignUpFormState extends State<SignUpForm> {
                         });
                   }),
               SizedBox(height: 20.h),
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  return state.status.isLoading
-                      ? Center(child: const CircularProgressIndicator())
-                      : AppButton(
-                          btnText: "Sign Up",
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<AuthCubit>().signup(
-                                  SignupRequestBody(
-                                      email: _emailController.text,
-                                      name: _nameController.text,
-                                      confirmPassword:
-                                          _confirmPasswordController.text,
-                                      password: _passwordController.text));
-                            }
-                          });
-                },
-              )
+              AppButton(
+                  btnText: "Sign Up",
+                  onPress: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<AuthCubit>().signup(SignupRequestBody(
+                          email: _emailController.text,
+                          name: _nameController.text,
+                          confirmPassword: _confirmPasswordController.text,
+                          password: _passwordController.text));
+                    }
+                  })
             ]));
   }
 }

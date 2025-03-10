@@ -95,21 +95,15 @@ class _LoginFormState extends State<LoginForm> {
                 ],
               ),
               SizedBox(height: 20.h),
-              BlocBuilder<AuthCubit, AuthState>(
-                builder: (context, state) {
-                  return state.status.isLoading
-                      ? Center(child: const CircularProgressIndicator())
-                      : AppButton(
-                          btnText: "Login",
-                          onPress: () {
-                            if (_formKey.currentState!.validate()) {
-                              context.read<AuthCubit>().login(
-                                  email: _emailController.text,
-                                  password: _passwordController.text);
-                            }
-                          });
-                },
-              )
+              AppButton(
+                  btnText: "Login",
+                  onPress: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<AuthCubit>().login(
+                          email: _emailController.text,
+                          password: _passwordController.text);
+                    }
+                  })
             ]));
   }
 }

@@ -17,9 +17,7 @@ class CategoriesBlocBuilder extends StatelessWidget {
             current.status.isGetCategoriesError,
         builder: (context, state) {
           if (state.status.isGetCategoriesError) {
-            return Center(
-              child: Text(state.errorMessage),
-            );
+            return SizedBox.shrink();
           } else if (state.status.isGetCategoriesSuccess) {
             return CategoriesBuilder(categories: state.categories);
           } else {

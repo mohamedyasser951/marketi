@@ -10,14 +10,14 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authRepo})
       : super(const AuthState(status: AuthStatus.initial));
 
-  Future<void> init() async {
-    final token = await authRepo.getUserToken();
-    if (token != null) {
-      emit(state.copyWith(status: AuthStatus.loggedIn, accessToken: token));
-    } else {
-      emit(state.copyWith(status: AuthStatus.loggedOut));
-    }
-  }
+  // Future<void> init() async {
+  //   final token = await authRepo.getUserToken();
+  //   if (token != null) {
+  //     emit(state.copyWith(status: AuthStatus.loggedIn, accessToken: token));
+  //   } else {
+  //     emit(state.copyWith(status: AuthStatus.loggedOut));
+  //   }
+  // }
 
   void login({required String email, required String password}) async {
     emit(state.copyWith(status: AuthStatus.loading));

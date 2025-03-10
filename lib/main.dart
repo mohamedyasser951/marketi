@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/app.dart';
 import 'package:marketi/core/constants/bloc_observer.dart';
 import 'package:marketi/core/di/service_locator.dart';
-import 'package:marketi/core/helper/constants.dart';
+import 'package:marketi/core/constants/constants.dart';
 import 'package:marketi/core/helper/extensions.dart';
 import 'package:marketi/core/helper/shared_pref_helper.dart';
 
@@ -39,7 +39,7 @@ checkIfLoggedInUser() async {
   String? userToken = await SharedPrefHelper.getSecuredString(
     SharedPrefKeys.userToken,
   );
-  print(userToken);
+  debugPrint(userToken);
   // onboarding
   bool? isOnboarding = await SharedPrefHelper.getBool(
     SharedPrefKeys.onboarding,

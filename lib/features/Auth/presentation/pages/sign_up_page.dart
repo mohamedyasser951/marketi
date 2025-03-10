@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
+import 'package:marketi/core/helper/extensions.dart';
 import 'package:marketi/features/Auth/presentation/widgets/sign_up_form.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -22,7 +23,7 @@ class SignUpPage extends StatelessWidget {
                   const Text("Already have an account?"),
                   TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, AppRoutePaths.login);
+                        context.pushNamed(AppRoutePaths.login);
                       },
                       child: const Text("Sign In"))
                 ])

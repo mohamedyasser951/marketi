@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/constants/app_route_path.dart';
+import 'package:marketi/core/constants/constants.dart';
+import 'package:marketi/core/helper/extensions.dart';
+import 'package:marketi/core/helper/shared_pref_helper.dart';
 import 'package:marketi/core/network/dio_factory.dart';
-import 'package:marketi/features/Auth/data/datasources/local/auth_local_data_source.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
-import 'package:marketi/features/MainLayout/presentation/pages/main_layout.dart';
 
 class AuthBlocListener extends StatelessWidget {
   const AuthBlocListener({super.key});
@@ -13,26 +14,20 @@ class AuthBlocListener extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthCubit, AuthState>(
       listener: (context, state) {
+        if (state.status.isLoading) loading(context);
         if (state.status.isError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.red,
-              content: Text(state.message),
-            ),
-          );
+          context.pop();
+
+          showToast(text: state.message, color: ToastColors.error);
         }
         if (state.status == AuthStatus.loggedIn) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              backgroundColor: Colors.green,
-              content: Text("Logged In Successfully"),
-            ),
-          );
+          context.pop();
+
+          showToast(text: state.message, color: ToastColors.success);
+
           saveUserToken(state);
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => MainLayout()),
-              (route) => false);
+          context.pushNamedAndRemoveUntil(AppRoutePaths.layout,
+              predicate: (route) => false);
         }
       },
       child: SizedBox.shrink(),
@@ -41,8 +36,9 @@ class AuthBlocListener extends StatelessWidget {
 
   void saveUserToken(AuthState state) {
     DioFactory.sendTokenAfterUserLogin(state.accessToken!);
-
-    getIt<AuthLocalDataSource>().saveTokens(
-        accessToken: state.accessToken, refreshToken: state.refreshToken!);
+    SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userToken, state.accessToken!);
+    SharedPrefHelper.setSecuredString(
+        SharedPrefKeys.userRefreshToken, state.refreshToken!);
   }
 }

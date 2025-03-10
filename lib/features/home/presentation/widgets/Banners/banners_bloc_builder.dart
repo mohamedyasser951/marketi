@@ -17,9 +17,7 @@ class BannersBlocBuilder extends StatelessWidget {
           current.status.isGetBannerSuccess,
       builder: (context, state) {
         if (state.status.isGetBannerError) {
-          return Center(
-            child: Text(state.errorMessage),
-          );
+          return SizedBox.shrink();
         } else if (state.status.isGetBannerSuccess) {
           return BannerBuilder(banners: state.banners);
         } else {

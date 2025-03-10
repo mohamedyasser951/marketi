@@ -5,7 +5,6 @@ import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/routing/app_routing.dart';
-import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 
@@ -20,7 +19,6 @@ class App extends StatelessWidget {
         splitScreenMode: true,
         child: MultiBlocProvider(
           providers: [
-            BlocProvider(create: (context) => getIt<AuthCubit>()..init()),
             BlocProvider(create: (context) => getIt<CartCubit>()),
             BlocProvider(create: (context) => getIt<FavoriteCubit>())
           ],

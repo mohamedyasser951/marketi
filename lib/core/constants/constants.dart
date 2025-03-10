@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketi/core/constants/colors.dart';
 
-
 bool isLoggedInUser = false;
 bool isCompletedOnboarding = false;
 
 class SharedPrefKeys {
   static const String userToken = 'userToken';
+  static const String userRefreshToken = "userRefreshToken";
   static const String onboarding = 'onboarding';
 }
 
@@ -46,9 +46,8 @@ void showToast({required String text, required ToastColors color}) {
 Future<dynamic> loading(BuildContext context) {
   return showDialog(
     context: context,
-    builder:
-        (context) => Center(
-          child: CircularProgressIndicator(color: AppColors.primaryColor),
-        ),
+    builder: (context) => Center(
+      child: CircularProgressIndicator(color: AppColors.primaryColor),
+    ),
   );
 }

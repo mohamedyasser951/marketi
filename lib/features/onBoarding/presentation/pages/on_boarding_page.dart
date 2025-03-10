@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/core/constants/colors.dart';
+import 'package:marketi/core/constants/constants.dart';
+import 'package:marketi/core/helper/extensions.dart';
+import 'package:marketi/core/helper/shared_pref_helper.dart';
 import 'package:marketi/features/onBoarding/data/models/on_boarding_model.dart';
 import 'package:marketi/features/onBoarding/presentation/widgets/on_boarding_item.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -35,12 +38,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   bool isLast = false;
 
   void submitStateOfOnBoarding() async {
-    Navigator.pushReplacementNamed(context, AppRoutePaths.login);
-    // SharedHelper.saveData(key: "onBoarding", value: true).then((value) {
-    //   if (value) {
-    //     naviagetAndKill(context: context, widget: SocialLogin());
-    //   }
-    // });
+    context.pushReplacementNamed(AppRoutePaths.login);
+    SharedPrefHelper.setData(SharedPrefKeys.onboarding, true);
   }
 
   @override
