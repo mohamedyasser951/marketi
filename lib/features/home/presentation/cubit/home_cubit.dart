@@ -10,59 +10,74 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeRepo homeRepo;
-  HomeCubit({required this.homeRepo})
-      : super(HomeState(status: HomeStatus.homeIntial));
+  HomeCubit({required this.homeRepo}) : super(HomeState());
 
   Future<void> getBanners() async {
-    emit(state.copyWith(status: HomeStatus.getBannerloading));
+    emit(state.copyWith(bannersStatus: RequestStatus.loading));
     final result = await homeRepo.getBanners();
     result.when(
       success: (banners) {
-        emit(state.copyWith(
-          status: HomeStatus.getBannerSuccess,
-          banners: banners,
-        ));
+        emit(
+          state.copyWith(
+            bannersStatus: RequestStatus.success,
+            banners: banners,
+          ),
+        );
       },
       error: (errorModel) {
-        emit(state.copyWith(
-            status: HomeStatus.getBannerError,
-            errorMessage: errorModel.getAllErrorMessages()));
+        emit(
+          state.copyWith(
+            bannersStatus: RequestStatus.error,
+            errorMessage: errorModel.getAllErrorMessages(),
+          ),
+        );
       },
     );
   }
 
   Future<void> getCategories() async {
-    emit(state.copyWith(status: HomeStatus.getCategoriesLoading));
+    emit(state.copyWith(categoriesStatus: RequestStatus.loading));
     final result = await homeRepo.getCategories();
     result.when(
       success: (categories) {
-        emit(state.copyWith(
-          status: HomeStatus.getCategoriesSuccess,
-          categories: categories,
-        ));
+        emit(
+          state.copyWith(
+            categoriesStatus: RequestStatus.success,
+            categories: categories,
+          ),
+        );
       },
       error: (errorModel) {
-        emit(state.copyWith(
-            status: HomeStatus.getCategoriesError,
-            errorMessage: errorModel.getAllErrorMessages()));
+        emit(
+          state.copyWith(
+            categoriesStatus: RequestStatus.error,
+            errorMessage: errorModel.getAllErrorMessages(),
+          ),
+        );
       },
     );
   }
+
   Future<void> getProducts() async {
-    emit(state.copyWith(status: HomeStatus.getProductsLoading));
+    emit(state.copyWith(productsStatus: RequestStatus.loading));
     final result = await homeRepo.getProducts();
     result.when(
       success: (products) {
-        emit(state.copyWith(
-          status: HomeStatus.getProductsSuccess,
-          products: products,
-        ));
+        emit(
+          state.copyWith(
+            productsStatus: RequestStatus.success,
+            products: products,
+          ),
+        );
       },
       error: (errorModel) {
         log(errorModel.getAllErrorMessages());
-        emit(state.copyWith(
-            status: HomeStatus.getProductsError,
-            errorMessage: errorModel.getAllErrorMessages()));
+        emit(
+          state.copyWith(
+            productsStatus: RequestStatus.error,
+            errorMessage: errorModel.getAllErrorMessages(),
+          ),
+        );
       },
     );
   }

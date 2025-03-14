@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/app.dart';
@@ -12,14 +11,7 @@ import 'package:marketi/core/helper/shared_pref_helper.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // set the status bar theme to white and icon brightness to light
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.white,
 
-      statusBarIconBrightness: Brightness.light, // Ensure icons are black
-    ),
-  );
   // To fix texts being hidden bug in flutter_screenutil in release mode.
   await ScreenUtil.ensureScreenSize();
 

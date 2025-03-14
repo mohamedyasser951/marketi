@@ -11,7 +11,6 @@ extension WidgetExtension on Widget? {
 
 // make extension for navigation
 extension Navigation on BuildContext {
-
   Future<dynamic> push(Widget page) {
     return Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
   }

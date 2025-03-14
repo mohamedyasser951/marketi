@@ -23,4 +23,5 @@ abstract class AuthApiService {
 
   @POST(ApiConstants.logout)
   Future<void> logout(@Header("Authorization") String token);
+  
 }

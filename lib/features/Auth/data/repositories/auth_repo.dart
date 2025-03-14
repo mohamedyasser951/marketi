@@ -11,6 +11,6 @@ abstract class AuthRepo {
   Future<ApiResult<SignupResponseBody>> signup(
       {required SignupRequestBody signupRequestBody});
 
-  Future<ApiResult<void>> logout({required String token});
+  Future<ApiResult<void>> logout();
 
 }

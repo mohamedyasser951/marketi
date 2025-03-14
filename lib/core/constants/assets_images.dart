@@ -6,6 +6,10 @@ class Assets {
   /// assets/images/cart_empty.svg
   static const String imagesCartEmpty = "assets/images/cart_empty.svg";
 
+  /// Assets for imagesCartIcon
+  /// assets/images/cart_icon.svg
+  static const String imagesCartIcon = "assets/images/cart_icon.svg";
+
   /// Assets for imagesCredit
   /// assets/images/credit.svg
   static const String imagesCredit = "assets/images/credit.svg";
@@ -21,6 +25,14 @@ class Assets {
   /// Assets for imagesForgotPasswordWithHhone
   /// assets/images/forgot_password_with_hhone.svg
   static const String imagesForgotPasswordWithHhone = "assets/images/forgot_password_with_hhone.svg";
+
+  /// Assets for imagesHeartIcon
+  /// assets/images/heart_icon.svg
+  static const String imagesHeartIcon = "assets/images/heart_icon.svg";
+
+  /// Assets for imagesHomeIcon
+  /// assets/images/home_icon.svg
+  static const String imagesHomeIcon = "assets/images/home_icon.svg";
 
   /// Assets for imagesIPhone11Pro3x
   /// assets/images/iPhone_11_Pro@3x.png
@@ -45,6 +57,10 @@ class Assets {
   /// Assets for imagesLogoSplashScreen
   /// assets/images/Logo_Splash_Screen.png
   static const String imagesLogoSplashScreen = "assets/images/Logo_Splash_Screen.png";
+
+  /// Assets for imagesMenuIcon
+  /// assets/images/menu_icon.svg
+  static const String imagesMenuIcon = "assets/images/menu_icon.svg";
 
   /// Assets for imagesNotification
   /// assets/images/notification.svg

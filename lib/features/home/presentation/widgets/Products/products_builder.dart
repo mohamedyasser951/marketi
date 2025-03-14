@@ -4,10 +4,7 @@ import 'package:marketi/features/home/presentation/widgets/Products/product_item
 
 class ProductsBuilder extends StatelessWidget {
   final List<ProductModel> products;
-  const ProductsBuilder({
-    super.key,
-    required this.products,
-  });
+  const ProductsBuilder({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +12,6 @@ class ProductsBuilder extends StatelessWidget {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 0.57,
-        
       ),
       delegate: SliverChildBuilderDelegate(
         (context, index) => ProductItem(product: products[index]),

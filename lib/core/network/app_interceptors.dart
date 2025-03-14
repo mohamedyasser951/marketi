@@ -46,7 +46,7 @@ class AppIntercepters extends Interceptor {
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     if (err.response?.statusCode == 401) {
       String? refreshTokenText =
-          SharedPrefHelper.getSecuredString(SharedPrefKeys.userRefreshToken);
+        await  SharedPrefHelper.getSecuredString(SharedPrefKeys.userRefreshToken);
 
       if (refreshTokenText != null) {
         if (await refreshToken()) {

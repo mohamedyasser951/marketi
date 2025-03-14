@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/widgets/app_button.dart';
+import 'package:marketi/core/widgets/custome_error_widget.dart';
 import 'package:marketi/features/cart/data/models/cart_item_model.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/cart/presentation/widgets/carts_builder.dart';
@@ -23,61 +24,63 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text("MyCart"),
-        ),
-        bottomSheet: BottomCheckoutView(),
-        body: BlocBuilder<CartCubit, CartState>(
-            buildWhen: (previous, current) =>
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("MyCart"),
+      ),
+      bottomSheet: BottomCheckoutView(),
+      body: BlocBuilder<CartCubit, CartState>(
+        buildWhen:
+            (previous, current) =>
                 current.status.isSuccess || current.status.isError,
-            builder: (context, state) {
+        builder: (context, state) {
           if (state.status.isError) {
-            return Center(
-              child: Text(state.errorMessage),
+            return CustomErrorWidget(
+              message: context.read<CartCubit>().state.errorMessage,
+              onRetry: () => context.read<CartCubit>().getCartItems(),
             );
           } else if (state.status.isSuccess) {
             return CartsBuilder(cartItems: state.cartItems);
           } else {
             return const Center(child: CircularProgressIndicator());
           }
-        }));
+        },
+      ),
+    );
   }
 }
 
 class BottomCheckoutView extends StatelessWidget {
-  const BottomCheckoutView({
-    super.key,
-  });
+  const BottomCheckoutView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
-      buildWhen: (previous, current) =>
-          current.status.isSuccess || current.status.isError,
+      buildWhen:
+          (previous, current) =>
+              current.status.isSuccess || current.status.isError,
       builder: (context, state) {
         if (state.status.isSuccess && state.cartItems.isNotEmpty) {
           return BottomAppBar(
             height: 130.h,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.w,
-              ),
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Column(
                 spacing: 10.h,
                 children: [
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "SupTotal (${state.cartItems.length.toString()}items): ",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                        ),
-                        Text(
-                          "${computeTotalPrice(state.cartItems).toStringAsFixed(2)} \$",
-                          style: TextStyle(color: Colors.black, fontSize: 18),
-                        ),
-                      ]),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "SupTotal (${state.cartItems.length.toString()}items): ",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Text(
+                        "${computeTotalPrice(state.cartItems).toStringAsFixed(2)} \$",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
                   AppButton(btnText: "checkout", onPress: () {}),
                 ],
               ),

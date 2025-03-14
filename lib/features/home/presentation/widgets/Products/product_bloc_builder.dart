@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketi/core/widgets/shimmer_loading.dart';
+import 'package:marketi/core/widgets/custome_error_widget.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
 import 'package:marketi/features/home/presentation/widgets/Products/products_builder.dart';
 import 'package:marketi/features/home/presentation/widgets/Products/products_loading.dart';
@@ -10,22 +10,23 @@ class ProductsBlocBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
-      buildWhen: (previous, current) =>
-          current.status.isGetProductsLoading ||
-          current.status.isGetProductsSuccess ||
-          current.status.isGetProductsError,
-      builder: (context, state) {
-        if (state.status.isGetProductsError) {
-          return SliverToBoxAdapter(child: SizedBox.shrink());
-        } else if (state.status.isGetProductsSuccess) {
-          return ProductsBuilder(
-            products: state.products,
+    return BlocSelector<HomeCubit, HomeState, RequestStatus>(
+      selector: (state) => state.productsStatus,
+      builder: (context, productsStatus) {
+        if (productsStatus == RequestStatus.loading) {
+          return ProductLoading();
+        } else if (productsStatus == RequestStatus.error) {
+          return SliverToBoxAdapter(
+            child: CustomErrorWidget(
+              message: context.read<HomeCubit>().state.errorMessage,
+              onRetry: () => context.read<HomeCubit>().getProducts(),
+            ),
           );
-        } else {
-          // return SliverToBoxAdapter(child: CircularProgressIndicator());
-          return ShimmerLoading(widget: ProductLoading());
+        } else if (productsStatus == RequestStatus.success) {
+          final products = context.read<HomeCubit>().state.products;
+          return ProductsBuilder(products: products);
         }
+        return SizedBox.shrink();
       },
     );
   }

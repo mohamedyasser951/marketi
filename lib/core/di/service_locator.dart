@@ -5,6 +5,7 @@ import 'package:marketi/features/Auth/data/datasources/remote/auth_api_service.d
 import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 import 'package:marketi/features/Auth/data/repositories/auth_repo_implem.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
+import 'package:marketi/features/MainLayout/presentation/cubit/main_layout_cubit.dart';
 import 'package:marketi/features/cart/data/datasources/remote/cart_api_service.dart';
 import 'package:marketi/features/cart/data/repositories/cart_repo.dart';
 import 'package:marketi/features/cart/data/repositories/cart_repo_implem.dart';
@@ -28,6 +29,7 @@ void setupServiceLocator() {
   Dio dio = DioFactory.getDio();
 
   //Cubits
+  getIt.registerFactory<NavigationCubit>(() => NavigationCubit());
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authRepo: getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(homeRepo: getIt()));
   getIt.registerFactory<CartCubit>(() => CartCubit(cartRepo: getIt()));

@@ -13,10 +13,11 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
-        BlocProvider.of<FavoriteCubit>(context).getFavorite();
+    BlocProvider.of<FavoriteCubit>(context).getFavorite();
 
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

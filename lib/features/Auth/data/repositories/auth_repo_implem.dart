@@ -1,3 +1,4 @@
+import 'package:marketi/core/constants/constants.dart';
 import 'package:marketi/core/helper/shared_pref_helper.dart';
 import 'package:marketi/core/network/api_error_handler.dart';
 import 'package:marketi/core/network/api_result.dart';
@@ -10,13 +11,12 @@ import 'package:marketi/features/Auth/data/repositories/auth_repo.dart';
 
 class AuthRepoImplem extends AuthRepo {
   AuthApiService authApiService;
-  AuthRepoImplem({
-    required this.authApiService,
-  });
+  AuthRepoImplem({required this.authApiService});
 
   @override
-  Future<ApiResult<LoginResponseBody>> login(
-      {required LoginRequestBody loginRequestBody}) async {
+  Future<ApiResult<LoginResponseBody>> login({
+    required LoginRequestBody loginRequestBody,
+  }) async {
     try {
       return ApiResult.success(await authApiService.login(loginRequestBody));
     } catch (e) {
@@ -25,8 +25,9 @@ class AuthRepoImplem extends AuthRepo {
   }
 
   @override
-  Future<ApiResult<SignupResponseBody>> signup(
-      {required SignupRequestBody signupRequestBody}) async {
+  Future<ApiResult<SignupResponseBody>> signup({
+    required SignupRequestBody signupRequestBody,
+  }) async {
     try {
       return ApiResult.success(await authApiService.signup(signupRequestBody));
     } catch (e) {
@@ -35,14 +36,15 @@ class AuthRepoImplem extends AuthRepo {
   }
 
   @override
-  Future<ApiResult<void>> logout({required String token}) async {
+  Future<ApiResult<void>> logout() async {
     try {
-      await SharedPrefHelper.clearAllSecuredData();
-      return ApiResult.success(await authApiService.logout(token));
+      final token = await SharedPrefHelper.getSecuredString(
+        SharedPrefKeys.userToken,
+      );
+      
+      return ApiResult.success(await authApiService.logout("Bearer $token"));
     } catch (e) {
       return ApiResult.error(ErrorHandler.handle(e));
     }
   }
-
-
 }
