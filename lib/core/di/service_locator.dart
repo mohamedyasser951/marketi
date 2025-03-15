@@ -21,7 +21,7 @@ import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
 import 'package:marketi/features/settings/data/datasources/remote/profile_api_service.dart';
 import 'package:marketi/features/settings/data/repositories/profile_repo.dart';
 import 'package:marketi/features/settings/data/repositories/profile_repo_implem.dart';
-import 'package:marketi/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:marketi/features/settings/presentation/cubit/profile_cubit.dart';
 
 GetIt getIt = GetIt.instance;
 
@@ -35,8 +35,8 @@ void setupServiceLocator() {
   getIt.registerFactory<CartCubit>(() => CartCubit(cartRepo: getIt()));
   getIt.registerFactory<FavoriteCubit>(
       () => FavoriteCubit(favoriteRepo: getIt()));
-  getIt.registerFactory<SettingsCubit>(
-      () => SettingsCubit(profileRepo: getIt()));
+  getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(profileRepo: getIt()));
 
   //Repositories
   getIt.registerLazySingleton<AuthRepo>(() => AuthRepoImplem(

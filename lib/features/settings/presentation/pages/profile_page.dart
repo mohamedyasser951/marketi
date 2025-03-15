@@ -5,7 +5,7 @@ import 'package:marketi/core/constants/constants.dart';
 import 'package:marketi/core/di/service_locator.dart';
 import 'package:marketi/core/helper/extensions.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
-import 'package:marketi/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:marketi/features/settings/presentation/cubit/profile_cubit.dart';
 import 'package:marketi/features/settings/presentation/widgets/profile_body.dart';
 import 'package:marketi/features/settings/presentation/widgets/profile_info_header.dart';
 
@@ -32,7 +32,7 @@ class ProfilePage extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(title: const Text("Profile")),
           body: BlocProvider(
-            create: (context) => getIt<SettingsCubit>()..getProfile(),
+            create: (context) => getIt<ProfileCubit>()..getProfile(),
             child: SingleChildScrollView(
               child: Column(
                 children: [

@@ -11,8 +11,8 @@ import 'package:marketi/features/MainLayout/presentation/pages/main_layout.dart'
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:marketi/features/home/presentation/cubit/home_cubit.dart';
-import 'package:marketi/features/home/presentation/pages/home_page.dart';
 import 'package:marketi/features/onBoarding/presentation/pages/on_boarding_page.dart';
+import 'package:marketi/features/settings/presentation/pages/update_profile_page.dart';
 import 'package:marketi/features/splash/presentation/page/splash_page.dart';
 
 abstract class AppRouting {
@@ -61,8 +61,8 @@ abstract class AppRouting {
                 child: MainLayout(),
               ),
         );
-      case AppRoutePaths.home:
-        return SlideLeftRoute(builder: (_) => const HomePage());
+      case AppRoutePaths.updateProfile:
+        return SlideLeftRoute(builder: (_) => const UpdateProfilePage());
       default:
         return null;
     }

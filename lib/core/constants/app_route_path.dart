@@ -6,4 +6,6 @@ abstract class AppRoutePaths {
   static const String layout = "/layout";
   static const String home = "/home";
   static const String profile = "/profile";
+    static const String updateProfile = "/updateProfile";
+
 }

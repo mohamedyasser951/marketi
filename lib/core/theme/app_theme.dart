@@ -15,10 +15,9 @@ class AppThemes {
     appBarTheme: AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle.dark,
 
-      color: AppColors.primaryColor,
-      iconTheme: IconThemeData(color: Colors.white),
+      iconTheme: IconThemeData(color: AppColors.darkBlueColor),
       titleTextStyle: TextStyle(
-        color: Colors.white,
+        color: AppColors.darkBlueColor,
         fontSize: 20,
         fontWeight: FontWeight.w600,
       ),

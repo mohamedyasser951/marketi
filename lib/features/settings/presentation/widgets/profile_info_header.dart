@@ -4,7 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marketi/core/constants/assets_images.dart';
 import 'package:marketi/core/widgets/custome_error_widget.dart';
 import 'package:marketi/core/widgets/shimmer_loading.dart';
-import 'package:marketi/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:marketi/features/settings/presentation/cubit/profile_cubit.dart';
+import 'package:marketi/features/settings/presentation/cubit/profile_state.dart';
 import 'package:marketi/features/settings/presentation/widgets/profile_info_header_loading.dart';
 
 class ProfileInfoHeader extends StatelessWidget {
@@ -16,12 +17,12 @@ class ProfileInfoHeader extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         SvgPicture.asset(Assets.imagesShapes),
-        BlocBuilder<SettingsCubit, SettingsState>(
+        BlocBuilder<ProfileCubit, ProfileState>(
           builder: (context, state) {
             if (state.status.isError) {
               CustomErrorWidget(
                 message: state.errorMessage.toString(),
-                onRetry: () => context.read<SettingsCubit>().getProfile(),
+                onRetry: () => context.read<ProfileCubit>().getProfile(),
               );
             } else if (state.status.isSuccess) {
               return Column(

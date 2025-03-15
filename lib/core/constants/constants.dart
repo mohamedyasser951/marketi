@@ -9,6 +9,7 @@ class SharedPrefKeys {
   static const String userToken = 'userToken';
   static const String userRefreshToken = "userRefreshToken";
   static const String onboarding = 'onboarding';
+  static const String isDarkTheme = 'isDarkTheme';
 }
 
 enum ToastColors { success, error, warning }

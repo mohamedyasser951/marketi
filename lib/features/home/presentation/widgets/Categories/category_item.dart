@@ -14,8 +14,8 @@ class CategoryItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 90,
-            width: 100,
+            height: 75,
+            width: 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: AppColors.lightBoderColor),
@@ -25,13 +25,8 @@ class CategoryItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 6.h,
-          ),
-          Text(
-            model.name,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+          SizedBox(height: 6.h),
+          Text(model.name, style: Theme.of(context).textTheme.bodyMedium),
         ],
       ),
     );
