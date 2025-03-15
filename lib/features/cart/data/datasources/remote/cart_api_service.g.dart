@@ -38,11 +38,13 @@ class _CartApiService implements CartApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<CartItemModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => CartItemModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    CartItemModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

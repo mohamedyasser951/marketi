@@ -38,11 +38,12 @@ class _HomeApiService implements HomeApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<BannerModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => BannerModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) => BannerModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -69,11 +70,13 @@ class _HomeApiService implements HomeApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<CategoryModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => CategoryModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    CategoryModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -100,11 +103,12 @@ class _HomeApiService implements HomeApiService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<ProductModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

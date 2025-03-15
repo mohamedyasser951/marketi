@@ -9,7 +9,7 @@ part 'auth_api_service.g.dart';
 
 @RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class AuthApiService {
-  factory AuthApiService(Dio dio) = _AuthApiService;
+  factory AuthApiService(Dio dio, {String baseUrl}) = _AuthApiService;
 
   @POST(ApiConstants.login)
   Future<LoginResponseBody> login(@Body() LoginRequestBody loginRequestBody);

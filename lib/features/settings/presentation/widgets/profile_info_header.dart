@@ -18,37 +18,44 @@ class ProfileInfoHeader extends StatelessWidget {
       children: [
         SvgPicture.asset(Assets.imagesShapes),
         BlocBuilder<ProfileCubit, ProfileState>(
+          buildWhen:
+              (previous, current) =>
+                  current.profileStatus.isSuccess ||
+                  current.profileStatus.isError ||
+                  current.profileStatus.isLoading,
           builder: (context, state) {
-            if (state.status.isError) {
+            if (state.profileStatus.isError) {
               CustomErrorWidget(
                 message: state.errorMessage.toString(),
                 onRetry: () => context.read<ProfileCubit>().getProfile(),
               );
-            } else if (state.status.isSuccess) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 58,
-                    backgroundImage: NetworkImage(
-                      state.userProfileModel!.profileImage,
-                    ),
-                  ),
-                  Text(
-                    state.userProfileModel!.name,
-                    style: Theme.of(context).textTheme.headlineMedium!,
-                  ),
-                  Text(
-                    state.userProfileModel!.email,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              );
+            } else if (state.profileStatus.isSuccess) {
+              return buildSuccess(context, state);
             }
             return Center(
               child: ShimmerLoading(widget: ProfileInfoHeaderLoading()),
             );
           },
+        ),
+      ],
+    );
+  }
+
+  Widget buildSuccess(BuildContext context, ProfileState state) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 58,
+          backgroundImage: NetworkImage(state.userProfileModel!.profileImage),
+        ),
+        Text(
+          state.userProfileModel!.name,
+          style: Theme.of(context).textTheme.headlineMedium!,
+        ),
+        Text(
+          state.userProfileModel!.email,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );

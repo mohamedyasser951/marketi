@@ -25,7 +25,10 @@ class ProfileRepoImplem extends ProfileRepo {
 
   @override
   Future<ApiResult<UserProfileModel>> updateProfile(
-      String name, String email, File? profileImage) async {
+    String name,
+    String email,
+    File? profileImage,
+  ) async {
     MultipartFileWrapper? imageMultipart;
     if (profileImage != null) {
       final file = await MultipartFile.fromFile(
@@ -34,10 +37,12 @@ class ProfileRepoImplem extends ProfileRepo {
       );
       imageMultipart = MultipartFileWrapper(file);
     }
-
+  
+    
     try {
       return ApiResult.success(
-          await profileApiService.updateProfile(name, email, imageMultipart));
+        await profileApiService.updateProfile(name, email, imageMultipart),
+      );
     } catch (e) {
       return ApiResult.error(ErrorHandler.handle(e));
     }

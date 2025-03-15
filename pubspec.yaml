@@ -18,21 +18,20 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.0.0
   flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
+  fluttertoast: ^8.2.12
   freezed_annotation: ^2.4.4
   get_it: ^8.0.3
+  google_fonts: ^6.2.1
+  image_picker: ^1.1.2
   json_annotation: ^4.9.0
   pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
+  shared_preferences: ^2.5.2
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
-  flutter_secure_storage: ^9.2.4
-  shared_preferences: ^2.5.2
-   # show hit message to user
-  fluttertoast: ^8.2.12
-  google_fonts: ^6.2.1
-  image_picker: ^1.1.2
-  
+
 dev_dependencies:
   build_runner: ^2.4.15
 
@@ -65,7 +64,7 @@ flutter_assets:
   fonts:
     - family: IconBroken
       fonts:
-        - asset: assets/fonts/icons.ttf 
+        - asset: assets/fonts/icons.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

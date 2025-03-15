@@ -5,8 +5,6 @@ class MultipartFileWrapper {
 
   MultipartFileWrapper(this.file);
 
-  Map<String, dynamic> toJson() {
-    // Return an empty map as the file itself doesn't require JSON conversion.
-    return {};
-  }
+  // Return the file itself (Retrofit will handle it)
+  MultipartFile toJson() => file;
 }

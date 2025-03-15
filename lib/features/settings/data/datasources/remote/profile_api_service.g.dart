@@ -29,7 +29,7 @@ class _ProfileApiService implements ProfileApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/auth/profile/',
+            'auth/profile/',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -67,14 +67,14 @@ class _ProfileApiService implements ProfileApiService {
     );
     final _options = _setStreamType<UserProfileModel>(
       Options(
-        method: 'PUT',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'multipart/form-data',
-      )
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
           .compose(
             _dio.options,
-            '/auth/profile/',
+            'auth/profile/',
             queryParameters: queryParameters,
             data: _data,
           )

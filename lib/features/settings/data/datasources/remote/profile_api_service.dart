@@ -13,12 +13,12 @@ abstract class ProfileApiService {
   @GET(ApiConstants.userProfile)
   Future<UserProfileModel> getProfile();
 
-
   @MultiPart()
   @PUT(ApiConstants.userProfile)
   Future<UserProfileModel> updateProfile(
     @Part(name: "name") String name,
     @Part(name: "email") String email,
-    @Part(name: "profile_image") MultipartFileWrapper? profileImage, // Updated type
+    @Part(name: "profile_image")
+    MultipartFileWrapper? profileImage, // Use the wrapper
   );
 }

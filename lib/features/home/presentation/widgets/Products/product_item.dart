@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/constants/constants.dart';
+import 'package:marketi/core/widgets/cache_network_image.dart';
 import 'package:marketi/features/cart/data/models/add_to_cart_request_body.dart';
 import 'package:marketi/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:marketi/features/favorite/presentation/cubit/favorite_cubit.dart';
@@ -43,11 +43,11 @@ class ProductItem extends StatelessWidget {
                       color: AppColors.lightBlue700Color,
                       child: AspectRatio(
                         aspectRatio: 170 / 200,
-                        child: CachedNetworkImage(
-                          height: 170,
-                          width: 200,
-                          fit: BoxFit.contain,
+                        child: CacheNetworkImage(
+                          height: 170.h,
+                          width: 200.w,
                           imageUrl: product.productImage!,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),

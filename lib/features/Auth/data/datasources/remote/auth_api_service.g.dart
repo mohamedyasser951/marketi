@@ -86,7 +86,7 @@ class _AuthApiService implements AuthApiService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/auth/logout/',
+            'auth/logout/',
             queryParameters: queryParameters,
             data: _data,
           )

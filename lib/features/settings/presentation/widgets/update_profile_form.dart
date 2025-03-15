@@ -24,8 +24,13 @@ class _UpdateProfileFormState extends State<UpdateProfileForm> {
   @override
   void initState() {
     formKey = GlobalKey<FormState>();
-    _nameController = TextEditingController();
-    _emailController = TextEditingController();
+    _nameController = TextEditingController(
+      text: BlocProvider.of<ProfileCubit>(context).state.userProfileModel?.name,
+    );
+    _emailController = TextEditingController(
+      text:
+          BlocProvider.of<ProfileCubit>(context).state.userProfileModel?.email,
+    );
     super.initState();
   }
 

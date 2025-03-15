@@ -38,11 +38,13 @@ class _FavoriteApiServices implements FavoriteApiServices {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<FavoriteModel> _value;
     try {
-      _value = _result.data!
-          .map(
-            (dynamic i) => FavoriteModel.fromJson(i as Map<String, dynamic>),
-          )
-          .toList();
+      _value =
+          _result.data!
+              .map(
+                (dynamic i) =>
+                    FavoriteModel.fromJson(i as Map<String, dynamic>),
+              )
+              .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
