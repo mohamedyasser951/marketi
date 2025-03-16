@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build_android:
+  build:
     name: Build Android APK
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +21,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          
+
       - name: Get packages
         run: flutter pub get
 
@@ -37,7 +37,7 @@ jobs:
           name: Flutter APK
           path: build/app/outputs/flutter-apk/app-release.apk
 
-  build_ios:
+  build:
     name: Build iOS IPA
     runs-on: macos-latest
     steps:
