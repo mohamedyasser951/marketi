@@ -44,7 +44,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'
+          flutter-version: 'stable'  # or specify a version with Dart >=3.7.0, e.g. '3.14.0'
           channel: 'stable'
 
       - name: Install CocoaPods
