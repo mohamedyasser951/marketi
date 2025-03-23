@@ -10,7 +10,7 @@ jobs:
   android-build:
     runs-on: ubuntu-latest
     steps:
-       - name: Checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install Flutter
@@ -21,7 +21,6 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
 
       - name: Get dependencies
         run: flutter pub get
