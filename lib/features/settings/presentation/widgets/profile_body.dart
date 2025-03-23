@@ -66,8 +66,8 @@ class ProfileBody extends StatelessWidget {
           trailing: const Icon(CupertinoIcons.right_chevron),
         ),
         ListTile(
-          onTap: () {
-            Commons.showLogoutDialog(context);
+          onTap: () async {
+            await Commons.showLogoutDialog(context);
           },
           leading: SvgPicture.asset(Assets.imagesLogOut),
           title: const Text("Log Out"),

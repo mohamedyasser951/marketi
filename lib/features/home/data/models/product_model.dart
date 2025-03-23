@@ -29,6 +29,13 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+
+  List<String?>? get images => [
+        ...gallery ?? [],
+        productImage,
+      ];
 }
 
 

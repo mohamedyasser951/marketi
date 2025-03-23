@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marketi/core/constants/app_route_path.dart';
 import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/core/di/service_locator.dart';
+import 'package:marketi/core/helper/extensions.dart';
 import 'package:marketi/core/widgets/confirm_dialog.dart';
 import 'package:marketi/features/Auth/presentation/cubit/auth_cubit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -54,8 +56,12 @@ class Commons {
       builder:
           (context) => ConfirmationDialog(
             alertMsg: 'Are you sure you want to logout',
-            onTapConfirm: () {
+            onTapConfirm: () async {
               getIt<AuthCubit>().logout();
+              context.pop();
+              Navigator.of(
+                context,
+              ).pushNamedAndRemoveUntil(AppRoutePaths.login, (route) => false);
             },
           ),
     );

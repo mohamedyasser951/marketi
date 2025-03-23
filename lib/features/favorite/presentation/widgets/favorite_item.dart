@@ -13,36 +13,77 @@ class FavoriteItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.lightBoderColor.withValues(alpha: 0.3),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(8),
-        leading: CacheNetworkImage(
-          height: 70.h,
-          width: 60.w,
-          fit: BoxFit.contain,
-          imageUrl: favoriteModel.product.productImage!,
-        ),
-        title: Text(favoriteModel.product.name),
-        subtitle: Text(
-          favoriteModel.product.description,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        trailing: IconButton(
-          icon: CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 18,
-            child: Icon(
-              Icons.favorite,
-              color: AppColors.darkBlueColor,
-              size: 22,
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      child: Stack(
+        children: [
+          Row(
+            spacing: 4,
+            children: [
+              Container(
+                height: 85,
+                width: 85,
+                decoration: BoxDecoration(
+                  color: AppColors.lightBoderColor.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                padding: const EdgeInsets.all(10),
+                child: CacheNetworkImage(
+                  height: 100.w,
+                  width: 90.h,
+                  fit: BoxFit.contain,
+                  imageUrl: favoriteModel.product.productImage!,
+                ),
+              ),
+
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  Text(
+                    favoriteModel.product.name,
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 1,
+                  ),
+                  Text(
+                    favoriteModel.product.category,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: AppColors.lightBlue700Color,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Positioned(
+            right: 0,
+            top: -8,
+            child: IconButton(
+              icon: CircleAvatar(
+                backgroundColor: Colors.white,
+                radius: 18,
+                child: Icon(
+                  Icons.favorite,
+                  color: AppColors.darkBlueColor,
+                  size: 22,
+                ),
+              ),
+              onPressed: () {
+                context.read<FavoriteCubit>().removeFromFavorite(
+                  favoriteModel.id,
+                );
+              },
             ),
           ),
-          onPressed: () {
-            context.read<FavoriteCubit>().removeFromFavorite(favoriteModel.id);
-          },
-        ),
+        ],
       ),
     );
   }

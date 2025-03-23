@@ -1,153 +1,161 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:marketi/features/cart/presentation/pages/cart_page.dart';
+import 'package:marketi/core/constants/colors.dart';
 import 'package:marketi/features/home/data/models/product_model.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/add_to_cart.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/image_slider.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/product_appbar.dart';
+import 'package:marketi/features/home/presentation/widgets/Products/product_info.dart';
 
-class ProductsDetails extends StatelessWidget {
+class ProductsDetails extends StatefulWidget {
   final ProductModel productModel;
   const ProductsDetails({super.key, required this.productModel});
 
   @override
+  State<ProductsDetails> createState() => _ProductsDetailsState();
+}
+
+class _ProductsDetailsState extends State<ProductsDetails> {
+  int currentImage = 0;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Product Details"),
+      floatingActionButton: AddToCart(
+        currentNumber: 1,
+        onAdd: () {},
+        onRemove: () {},
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: Colors.amber,
-              child: AspectRatio(
-                aspectRatio: 1.2,
-                child: CachedNetworkImage(
-                  imageUrl: productModel.productImage!,
-                  fit: BoxFit.contain,
-                ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const ProductAppBar(),
+              Stack(
+                children: [
+                  ImageSlider(
+                    onChange: (index) {
+                      setState(() {
+                        currentImage = index;
+                      });
+                    },
+                    currentImage: currentImage,
+                    images: widget.productModel.images ?? [],
+                  ),
+                  widget.productModel.images!.length > 1
+                      ? Positioned(
+                        bottom: 10,
+                        left: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+
+                          children: List.generate(
+                            widget.productModel.images!.length,
+                            (index) => AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              width: currentImage == index ? 15 : 8,
+                              height: 8,
+                              margin: const EdgeInsets.only(right: 2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: AppColors.lightBlue700Color,
+                                ),
+                                color:
+                                    currentImage == index
+                                        ? AppColors.lightBlue700Color
+                                        : Colors.transparent,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                      : const SizedBox(),
+                ],
               ),
-            ),
-            ProductDetailsInfo(productModel: productModel)
-          ],
+              ProductDetailsBody(widget: widget, currentImage: currentImage),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class ProductDetailsInfo extends StatelessWidget {
-  final ProductModel productModel;
+class ProductDetailsBody extends StatelessWidget {
+  const ProductDetailsBody({
+    super.key,
+    required this.widget,
+    required this.currentImage,
+  });
 
-  const ProductDetailsInfo({super.key, required this.productModel});
+  final ProductsDetails widget;
+  final int currentImage;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
+        ),
+        color: AppColors.lightBoderColor.withValues(alpha: 0.2),
+      ),
+      padding: const EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 100),
       child: Column(
-        spacing: 6,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${productModel.price}LE",
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const CartPage();
-                    }));
-                  },
-                  icon: const Icon(
-                    Icons.shopping_cart,
-                    color: Colors.black,
-                  ))
-            ],
-          ),
+          ProductInfo(product: widget.productModel),
+          const SizedBox(height: 10),
           Text(
-            productModel.name,
-            style:
-                Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 20),
+            'Description',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final text = Text(
-                productModel.description,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              );
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  text,
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          'Read more',
-                          style: TextStyle(color: Colors.blue),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.blue,
-                          size: 15,
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-          Text("Select Size", style: Theme.of(context).textTheme.bodyLarge),
-          ProductSizeView()
+          ProductDetailsInfo(productModel: widget.productModel),
         ],
       ),
     );
   }
 }
 
-class ProductSizeView extends StatelessWidget {
-  const ProductSizeView({
-    super.key,
-  });
+class ProductDetailsInfo extends StatefulWidget {
+  final ProductModel productModel;
+
+  const ProductDetailsInfo({super.key, required this.productModel});
+
+  @override
+  ProductDetailsInfoState createState() => ProductDetailsInfoState();
+}
+
+class ProductDetailsInfoState extends State<ProductDetailsInfo> {
+  bool isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Row(spacing: 4, children: [
-      Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.productModel.description,
+          maxLines: isExpanded ? null : 3,
+          overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
         ),
-        child: const Text("S"),
-      ),
-      Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: Text(
+            isExpanded ? 'Read less' : 'Read more',
+            style: TextStyle(color: AppColors.lightBlue700Color),
+          ),
         ),
-        child: const Text("M"),
-      ),
-      Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Text("L"),
-      ),
-    ]);
+      ],
+    );
   }
 }

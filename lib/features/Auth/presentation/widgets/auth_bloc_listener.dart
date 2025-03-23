@@ -23,7 +23,6 @@ class AuthBlocListener extends StatelessWidget {
         if (state.status == AuthStatus.loggedIn) {
           context.pop();
 
-          showToast(text: state.message, color: ToastColors.success);
 
           saveUserToken(state);
           context.pushNamedAndRemoveUntil(AppRoutePaths.layout,
