@@ -44,7 +44,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.0'
+          flutter-version: 'stable'  # or specify a version with Dart >=3.7.0, e.g. '3.14.0'
           channel: 'stable'
 
       - name: Install CocoaPods
@@ -57,7 +57,7 @@ jobs:
 
       - name: Build iOS
         run: flutter build ipa --release --export-method app-store
-        
+
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v3
         with:
