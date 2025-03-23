@@ -29,7 +29,7 @@ jobs:
         run: flutter build apk --release
 
       - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: apk
           path: build/app/outputs/flutter-apk/app-release.apk
@@ -44,7 +44,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'  # or specify a version with Dart >=3.7.0, e.g. '3.14.0'
+          flutter-version: 'stable'
           channel: 'stable'
 
       - name: Install CocoaPods
@@ -58,8 +58,4 @@ jobs:
       - name: Build iOS
         run: flutter build ipa --release --export-method app-store
 
-      - name: Upload IPA artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ipa
-          path: build/ios/ipa/*.ipa
+      - name: Upload IPA arti
